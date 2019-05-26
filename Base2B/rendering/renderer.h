@@ -13,6 +13,7 @@ public:
     virtual ~Renderer();
 
     virtual void draw(int x, int y, QPixmap &pm);
+    //virtual void drawRect(QRect qr);
     QPainter &getPainter();
 
 protected:

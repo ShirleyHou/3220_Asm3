@@ -32,9 +32,9 @@ public:
 protected:
     virtual void spawnObstacles(unsigned int counter);
     void addObstacle(std::unique_ptr<Entity> obstacle);
-    void speedUp(unsigned int counter);
+    virtual void speedUp(unsigned int counter);
 
-    void renderBackground(Renderer &renderer, unsigned int counter);
+    virtual void renderBackground(Renderer &renderer, unsigned int counter);
     void renderClouds(Renderer &renderer, unsigned int counter);
     void renderObstacles(Renderer &renderer, unsigned int counter);
 
@@ -47,9 +47,10 @@ protected:
     Score score;
     int counter;
 
+    Moon moon;
+
 private:
     bool night;
-    Moon moon;
     unsigned int obstacleSpawnFrame;
     unsigned int cloudSpawnFrame;
 };

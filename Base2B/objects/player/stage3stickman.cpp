@@ -1,8 +1,10 @@
 #include "stage3stickman.h"
 #include "collision.h"
 #include <iostream>
-Stage3Stickman::Stage3Stickman(int floor, int jumpImpulse, int maxJumpCount, int gravity) :
-    JumpingStickman (floor, jumpImpulse, maxJumpCount, gravity) {
+Stage3Stickman::Stage3Stickman(int floor, int jumpImpulse, int maxJumpCount, int gravity, int life) :
+    JumpingStickman (floor, jumpImpulse, maxJumpCount, gravity)
+    life(life)
+{
 }
 void Stage3Stickman::handleInput(QKeyEvent &event) {
     if (event.key() == Qt::Key_Space && !event.isAutoRepeat() && canJump()) {
@@ -10,7 +12,7 @@ void Stage3Stickman::handleInput(QKeyEvent &event) {
     }
 }
 
-
+//haven't modified
 void Stage3Stickman::update(std::vector<std::unique_ptr<Entity>> &obstacles) {
     Coordinate &ac = getCoordinate();
     int newY = ac.getYCoordinate() + jumpVelocity;

@@ -1,6 +1,6 @@
 #include "stage3dialog.h"
 #include <iostream>
-
+#include <QtMath>
 Stage3Dialog::Stage3Dialog(Game &game,
                            std::unique_ptr<Stickman> stickman,
                            std::unique_ptr<EntityFactory> factory,
@@ -29,6 +29,7 @@ void Stage3Dialog::input(QKeyEvent &event){
     }
     if (event.key() == Qt::Key_Right && game.longPressed==true) {
         moveRight();
+
     }
 
 }
@@ -38,19 +39,27 @@ void Stage3Dialog::update() {
 
     if(game.longPressed==false){
         background.setVelocity(0);
+        for (auto &o : obstacles) {
+
+            o->setVelocity(0);
+        }
     }else{
         background.setVelocity(frameVelocity);
+        score.increment();
+        for (auto &o : obstacles) {
+
+            o->setVelocity(frameVelocity);
+        }
     }
 
 
-    //background.setVelocity(background.getVelocity()+frameVelocity);
     stickman->update(obstacles);
     if (!stickman->isColliding()) {
         // Reduce distance to next obstacle
         distanceToSpawn -= background.getVelocity();
         background.update();
-        speedUp(counter);
-        score.increment();
+
+
     }
     spawnObstacles(counter);
 
@@ -59,6 +68,35 @@ void Stage3Dialog::update() {
     }
 
     for (auto &o : obstacles) {
+
         o->collisionLogic(*stickman);
     }
+}
+
+void Stage3Dialog::speedUp(unsigned int counter){
+
+}
+
+void Stage3Dialog::renderBackground(Renderer &renderer, unsigned int counter) {
+
+
+    game.setStyleSheet("background-color: #000000;");
+    if (moon.render(renderer, counter)) {
+
+//        if (night) {
+//
+//        } else {
+//            game.setStyleSheet("background-color: #000000;");
+//        }
+//        night = !night;
+
+
+    }
+
+    QPainter& painter  = renderer.getPainter();
+    QRect overlay = QRect(0,0,5000,2400);
+    painter.fillRect(overlay, QBrush(QColor(40, 80, 255, (qSin((double)counter/280)*120+120))));
+    painter.drawRect(overlay);
+    renderClouds(renderer, counter);
+    background.render(renderer, counter);
 }
