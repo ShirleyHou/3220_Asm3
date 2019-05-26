@@ -18,7 +18,7 @@ public:
 
     void render(Renderer &renderer, unsigned int time);
     void update();
-
+    int initialVelocity;
 private:
     Coordinate coordinate;
     int velocity;

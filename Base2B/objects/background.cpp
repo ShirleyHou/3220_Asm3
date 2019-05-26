@@ -23,6 +23,7 @@ void Background::render(Renderer &renderer, unsigned int /*time*/) {
     int x = coordinate.getQtRenderingXCoordinate();
     renderer.draw(x % 1200, coordinate.getQtRenderingYCoordinate() - sprite.height(), sprite);
     renderer.draw(x % 1200 + 1200, coordinate.getQtRenderingYCoordinate() - sprite.height(), sprite);
+    renderer.draw(x % 1200 - 1200, coordinate.getQtRenderingYCoordinate() - sprite.height(), sprite);
 }
 
 void Background::update() {

@@ -5,6 +5,8 @@
 #include "swaprendererstage.h"
 #include "testingdialog.h"
 #include "stage2dialog.h"
+#include "stage3dialog.h"
+#include "stage3stickman.h"
 #include "dialog.h"
 #include "moon.h"
 #include "background.h"
@@ -14,7 +16,21 @@ StageFactory::StageFactory(Config config) : config(config) {
 }
 
 std::unique_ptr<GameStage> StageFactory::createStage() {
-    if (config.stage == 2) {
+    if (config.stage==3){
+        //currently no test mode
+        auto player = std::make_unique<Stage3Stickman>(config.coord.getYCoordinate());
+        player->setSize("normal");//config.size is a string.
+        player->setCoordinate(config.coord);
+        player->setSprite(":sprites/sprite0.png");
+
+        auto factory = std::make_unique<EntityFactory>();
+        factory->setVelocity(config.velocity);
+
+        auto stage = std::make_unique<Stage3Dialog>(*config.game, std::move(player), std::move(factory), std::move(*config.obstacles));
+        genericDialogInitializer(*stage);
+        return std::make_unique<SwapRendererStage>(std::move(stage));
+
+    }else if (config.stage == 2) {
         if (config.testMode) {
             // Stage 2 test mode
             std::vector<std::unique_ptr<TestRunner>> tests;
@@ -60,6 +76,12 @@ void StageFactory::genericDialogInitializer(Dialog &dialog) {
     bg.setCoordinate(Coordinate(0, 150, 450));
     bg.setSprite(config.background);
     bg.setVelocity(config.velocity);
+    bg.initialVelocity = config.velocity;
+    if(config.stage==3){
+        bg.setVelocity(0);
+        bg.initialVelocity = 0;
+    }
+
 
     dialog.setBackground(bg);
     dialog.setMoon(Moon(Coordinate(400, -140, 450), 181.0, 550));

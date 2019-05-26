@@ -6,7 +6,12 @@ Stage2Dialog::Stage2Dialog(Game &game, std::unique_ptr<Stickman> stickman, std::
     Dialog(game, std::move(stickman), std::move(factory)), obstacleLayout(std::move(obstacleLayout)), distanceToSpawn(0), nextObstacle(0) {
 
 }
+Stage2Dialog::~Stage2Dialog(){
 
+}
+void Stage2Dialog::input(QKeyEvent &event){
+    stickman->handleInput(event);
+}
 void Stage2Dialog::spawnObstacles(unsigned int /*counter*/) {
     // Check if it's time to spawn an obstacle
     if (obstacleLayout.size() == 0 || distanceToSpawn > 0) return;

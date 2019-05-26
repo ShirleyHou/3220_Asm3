@@ -20,13 +20,14 @@ public:
     void jump();
     bool canJump();
 
-    void handleInput(QKeyEvent &event);
-    void update(std::vector<std::unique_ptr<Entity>> &obstacles);
+    virtual void handleInput(QKeyEvent &event);
+    virtual void update(std::vector<std::unique_ptr<Entity>> &obstacles);
 
-private:
+protected:
     int floor;
     int jumpImpulse;
     int jumpVelocity;
+
     int gravity;
     bool grounded;
     int jumpCount;

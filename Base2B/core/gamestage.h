@@ -13,6 +13,7 @@ public:
     virtual void update();
     virtual void render(Renderer &renderer);
     virtual void input(QKeyEvent &event);
+
 };
 
 #endif // GAMESTAGE_H

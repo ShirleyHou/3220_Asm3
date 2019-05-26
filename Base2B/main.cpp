@@ -62,11 +62,12 @@ int main(int argc, char *argv[]) {
     stageConfig.game = &game;
 
     // Read config file and set basic game attributes
-    if (!exists("../Base2B/config.txt")) {
-        cout << "Config file not found. Terminating" << endl;
-        return 0;
-    }
-    QFile inputFile(QString("../Base2B/config.txt"));
+//    if (!exists(":/resources/config.txt")) {
+//        cout << "Config file not found. Terminating" << endl;
+//        return 0;
+//    }
+    //QFile inputFile(QString(":/resources/config.txt"));
+    QFile inputFile(":/config.txt");
     inputFile.open(QIODevice::ReadOnly);
     QTextStream stream(&inputFile);
     QString line = stream.readLine();
@@ -119,7 +120,7 @@ int main(int argc, char *argv[]) {
                 return 0;
             }
             stageConfig.stage = value.toInt();
-            if (stageConfig.stage != 1 && stageConfig.stage != 2) {
+            if (stageConfig.stage != 1 && stageConfig.stage != 2 && stageConfig.stage!=3) {
                 cout << "Invalid stage value. Terminating";
                 return 0;
             }

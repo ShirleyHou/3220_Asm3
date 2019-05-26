@@ -14,13 +14,15 @@ public:
     ~Game() = default;
 
     void setStage(std::unique_ptr<GameStage> stage);
-
+    bool longPressed;
 protected:
     void keyPressEvent(QKeyEvent *event);
+    void keyReleaseEvent(QKeyEvent* event);
     void paintEvent(QPaintEvent *event);
 
 private:
     std::unique_ptr<GameStage> stage;
+
 
 public slots:
     void nextFrame();
