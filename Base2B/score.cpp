@@ -12,6 +12,16 @@ Score::Score():
 void Score::increment() {
     currScore++;
 }
+void Score::incrementBy(int update) {
+    currScore = currScore+update;
+}
+void Score::decrement() {
+    currScore--;
+}
+
+void Score::setScore(int score){
+    currScore = score;
+}
 
 // Render score from left to right. Requires FILO reading of integer
 void Score::render(Renderer &renderer) {

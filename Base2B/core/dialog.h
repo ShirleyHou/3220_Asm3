@@ -28,6 +28,7 @@ public:
     void setStickman(std::unique_ptr<Stickman> stickman);
     void setBackground(Background background);
     void setMoon(Moon moon);
+    void setScore(int score);
 
 protected:
     virtual void spawnObstacles(unsigned int counter);

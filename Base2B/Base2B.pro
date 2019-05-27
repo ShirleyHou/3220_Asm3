@@ -64,7 +64,8 @@ SOURCES += \
     objects/player/normalstatestickman.cpp \
     objects/player/tinystatestickman.cpp \
     objects/player/largestickmanstate.cpp \
-    objects/player/giantstatestickman.cpp
+    objects/player/giantstatestickman.cpp \
+    life.cpp
 
 HEADERS += \
     objects/entities/colouredentity.h \
@@ -100,7 +101,8 @@ HEADERS += \
     objects/player/normalstatestickman.h \
     objects/player/tinystatestickman.h \
     objects/player/giantstatestickman.h \
-    objects/player/largestatestickman.h
+    objects/player/largestatestickman.h \
+    life.h
 
 FORMS += \
         dialog.ui

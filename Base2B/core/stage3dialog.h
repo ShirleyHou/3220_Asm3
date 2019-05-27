@@ -12,7 +12,7 @@ public:
                  std::vector<std::pair<std::unique_ptr<Entity>, int>> obstacleLayout);
     ~Stage3Dialog(){}
     void input(QKeyEvent &event) override;
-
+    void render(Renderer &renderer);
     void update() override;
     //since the stickman never moves, update relative velocity in dialogue instead.
     void speedUp(unsigned int counter) override;

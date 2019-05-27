@@ -1,6 +1,6 @@
 #include "jumpingstickman.h"
 #include "collision.h"
-
+#include <iostream>
 JumpingStickman::JumpingStickman(int floor, int jumpImpulse, int maxJumpCount, int gravity) :
     floor(floor), jumpImpulse(jumpImpulse), jumpVelocity(0), gravity(gravity), jumpCount(0), maxJumpCount(maxJumpCount)  {
 
@@ -24,6 +24,10 @@ void JumpingStickman::handleInput(QKeyEvent &event) {
     if (event.key() == Qt::Key_Space && !event.isAutoRepeat() && canJump()) {
         jump();
     }
+}
+void JumpingStickman::render(Renderer &renderer, unsigned int time){
+    Stickman::render(renderer, time);
+
 }
 
 void JumpingStickman::update(std::vector<std::unique_ptr<Entity>> &obstacles) {

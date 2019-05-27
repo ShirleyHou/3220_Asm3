@@ -61,12 +61,6 @@ int main(int argc, char *argv[]) {
     stageConfig.obstacles = &obstacles;
     stageConfig.game = &game;
 
-    // Read config file and set basic game attributes
-//    if (!exists(":/resources/config.txt")) {
-//        cout << "Config file not found. Terminating" << endl;
-//        return 0;
-//    }
-    //QFile inputFile(QString(":/resources/config.txt"));
     QFile inputFile(":/config.txt");
     inputFile.open(QIODevice::ReadOnly);
     QTextStream stream(&inputFile);
@@ -145,6 +139,7 @@ int main(int argc, char *argv[]) {
                 e = make_unique<ColouredEntity>(move(e), QColor(sl.at(4).toInt(), sl.at(5).toInt(), sl.at(6).toInt()));
                 e->setSize(sl.at(0).toInt(), sl.at(1).toInt());
                 e->getCoordinate().setYCoordinate(sl.at(2).toInt());
+                e->collided = false;
                 int flyRate = sl.at(7).toInt();
                 if (flyRate != 0) {
                     e = make_unique<FlyingEntity>(move(e), flyRate);

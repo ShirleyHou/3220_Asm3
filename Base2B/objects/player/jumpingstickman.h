@@ -19,7 +19,7 @@ public:
 
     void jump();
     bool canJump();
-
+    virtual void render(Renderer &renderer, unsigned int time);
     virtual void handleInput(QKeyEvent &event);
     virtual void update(std::vector<std::unique_ptr<Entity>> &obstacles);
 

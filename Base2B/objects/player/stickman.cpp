@@ -1,5 +1,5 @@
 #include "stickman.h"
-
+#include <iostream>
 Stickman::~Stickman() {
 
 }

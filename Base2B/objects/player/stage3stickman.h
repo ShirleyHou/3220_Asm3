@@ -4,7 +4,8 @@
 #include <memory>
 #include "entity.h"
 #include "jumpingstickman.h"
-
+#include "score.h"
+#include "life.h"
 class StickmanState;
 class Stage3Stickman : public JumpingStickman {
 public:
@@ -23,8 +24,10 @@ public:
     ~Stage3Stickman(){};
     void handleInput(QKeyEvent &event);
 
-    int life;
+    Life life;
     void update(std::vector<std::unique_ptr<Entity>> &obstacles) override;
+    void render(Renderer &renderer, unsigned int time) override;
+    Score score;
 
     StickmanState* current_state;
 

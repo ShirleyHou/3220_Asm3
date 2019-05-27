@@ -30,6 +30,9 @@ public:
     virtual void setVelocity(int v);
 
     virtual std::unique_ptr<Entity> clone();
+    //modified
+    bool collided =false;
+    bool passed = false;
 
 protected:
     std::string name;

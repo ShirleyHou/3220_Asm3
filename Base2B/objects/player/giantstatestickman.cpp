@@ -19,27 +19,19 @@ void GiantStateStickman::update(Stage3Stickman* context, std::vector<std::unique
     int erase_pos = 0;
     for (auto &other : obstacles) {
         Collision::CollisonResult col = Collision::moveCast(*context, *other, 0, context->jumpVelocity);
-
-        if (col.overlapped) {
-
-            to_erase.push_back(erase_pos);
-//            int by = other->getCoordinate().getYCoordinate();
-//            if (col.down && context->jumpVelocity < 0) {
-//                // Hitting obstacle from above
-//                context->jumpVelocity = 0;
-//                context->grounded = true;
-//                context->jumpCount = 0;
-//                newY = by + other->height() + 1;
-//            } else if (col.up) {
-//                // Hitting obstacle from below
-//                context->jumpVelocity = 0;
-//                newY = by - context->height() - 1;
-//            } else {
-//                // Hidding obstacle from the side
-//                context->colliding = true;
-//            }
+        if (!other->passed && other->getCoordinate().getXCoordinate()+other->width() <ac.getXCoordinate()){
+            context->score.incrementBy(1);
+            other->passed=true;
         }
-        //erase_pos ++;
+        if (col.overlapped) {
+            if(!other->collided){
+                context->score.incrementBy(100);
+            }
+            to_erase.push_back(erase_pos);
+
+
+        }
+
     }
     //does erase
     for (auto it = to_erase.rbegin(); it != to_erase.rend(); ++it){

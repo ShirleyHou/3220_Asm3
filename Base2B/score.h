@@ -12,9 +12,11 @@ public:
     Score();
 
     void increment();
+    void incrementBy(int update);
+    void decrement();
     void render(Renderer &renderer);
-
-private:
+    void setScore(int score);
+//private
     unsigned int hiscore;
     unsigned int currScore;
     QPixmap digits[10];

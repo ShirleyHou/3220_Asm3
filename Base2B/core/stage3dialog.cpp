@@ -35,6 +35,7 @@ void Stage3Dialog::input(QKeyEvent &event){
 }
 
 
+
 void Stage3Dialog::update() {
 
     if(game.longPressed==false){
@@ -45,7 +46,7 @@ void Stage3Dialog::update() {
         }
     }else{
         background.setVelocity(frameVelocity);
-        score.increment();
+
         for (auto &o : obstacles) {
 
             o->setVelocity(frameVelocity);
@@ -75,6 +76,12 @@ void Stage3Dialog::update() {
 
 void Stage3Dialog::speedUp(unsigned int counter){
 
+}
+void Stage3Dialog::render(Renderer &renderer) {
+    renderBackground(renderer, counter);
+    renderObstacles(renderer, counter);
+    stickman->render(renderer, counter);
+    counter++;
 }
 
 void Stage3Dialog::renderBackground(Renderer &renderer, unsigned int counter) {
