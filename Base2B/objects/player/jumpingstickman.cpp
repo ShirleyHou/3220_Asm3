@@ -17,7 +17,7 @@ void JumpingStickman::jump() {
 }
 
 bool JumpingStickman::canJump() {
-    return jumpCount < maxJumpCount;
+    return jumpCount <= maxJumpCount;
 }
 
 void JumpingStickman::handleInput(QKeyEvent &event) {

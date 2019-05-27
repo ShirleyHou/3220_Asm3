@@ -81,22 +81,17 @@ void Stage3Dialog::renderBackground(Renderer &renderer, unsigned int counter) {
 
 
     game.setStyleSheet("background-color: #000000;");
-    if (moon.render(renderer, counter)) {
 
-//        if (night) {
-//
-//        } else {
-//            game.setStyleSheet("background-color: #000000;");
-//        }
-//        night = !night;
-
-
-    }
 
     QPainter& painter  = renderer.getPainter();
     QRect overlay = QRect(0,0,5000,2400);
-    painter.fillRect(overlay, QBrush(QColor(40, 80, 255, (qSin((double)counter/280)*120+120))));
+    painter.fillRect(overlay, QBrush(QColor(40, 40, 255, (qSin((double)counter/280-100)*100+120))));
     painter.drawRect(overlay);
+    QRect overlay2 = QRect(0,0,5000,2400);
+    painter.fillRect(overlay2, QBrush(QColor(200, 230, 255, (qSin((double)counter/280)*120+120))));
+    painter.drawRect(overlay2);
+
     renderClouds(renderer, counter);
+    moon.render(renderer, counter);
     background.render(renderer, counter);
 }

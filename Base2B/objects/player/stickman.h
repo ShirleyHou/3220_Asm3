@@ -33,7 +33,7 @@ public:
     int width();
     int height();
 
-protected:
+//protected, add setter
     bool colliding;
 
 private:

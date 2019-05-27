@@ -23,7 +23,7 @@ public:
     virtual void handleInput(QKeyEvent &event);
     virtual void update(std::vector<std::unique_ptr<Entity>> &obstacles);
 
-protected:
+//protected
     int floor;
     int jumpImpulse;
     int jumpVelocity;

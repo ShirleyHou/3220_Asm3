@@ -80,7 +80,9 @@ SOURCES       = ../Base2B/objects/entities/colouredentity.cpp \
 		../Base2B/core/testing/testcases/flyingobstacletest.cpp \
 		../Base2B/core/stagefactory.cpp \
 		../Base2B/objects/player/stage3stickman.cpp \
-		../Base2B/core/stage3dialog.cpp qrc_resources.cpp \
+		../Base2B/core/stage3dialog.cpp \
+		../Base2B/objects/player/normalstatestickman.cpp \
+		../Base2B/objects/player/tinystatestickman.cpp qrc_resources.cpp \
 		moc_game.cpp
 OBJECTS       = colouredentity.o \
 		entity.o \
@@ -111,6 +113,8 @@ OBJECTS       = colouredentity.o \
 		stagefactory.o \
 		stage3stickman.o \
 		stage3dialog.o \
+		normalstatestickman.o \
+		tinystatestickman.o \
 		qrc_resources.o \
 		moc_game.o
 DIST          = ../../../../Qt/5.13.0/clang_64/mkspecs/features/spec_pre.prf \
@@ -334,7 +338,10 @@ DIST          = ../../../../Qt/5.13.0/clang_64/mkspecs/features/spec_pre.prf \
 		../Base2B/core/testing/testcases/flyingobstacletest.h \
 		../Base2B/core/stagefactory.h \
 		../Base2B/objects/player/stage3stickman.h \
-		../Base2B/core/stage3dialog.h ../Base2B/objects/entities/colouredentity.cpp \
+		../Base2B/core/stage3dialog.h \
+		../Base2B/objects/player/stickmanstate.h \
+		../Base2B/objects/player/normalstatestickman.h \
+		../Base2B/objects/player/tinystatestickman.h ../Base2B/objects/entities/colouredentity.cpp \
 		../Base2B/objects/entities/entity.cpp \
 		../Base2B/objects/entities/entitydecorator.cpp \
 		../Base2B/objects/entities/entityfactory.cpp \
@@ -362,7 +369,9 @@ DIST          = ../../../../Qt/5.13.0/clang_64/mkspecs/features/spec_pre.prf \
 		../Base2B/core/testing/testcases/flyingobstacletest.cpp \
 		../Base2B/core/stagefactory.cpp \
 		../Base2B/objects/player/stage3stickman.cpp \
-		../Base2B/core/stage3dialog.cpp
+		../Base2B/core/stage3dialog.cpp \
+		../Base2B/objects/player/normalstatestickman.cpp \
+		../Base2B/objects/player/tinystatestickman.cpp
 QMAKE_TARGET  = Base2B
 DESTDIR       = 
 TARGET        = Base2B.app/Contents/MacOS/Base2B
@@ -813,8 +822,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../Base2B/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/5.13.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Base2B/objects/entities/colouredentity.h ../Base2B/objects/entities/entity.h ../Base2B/objects/entities/entitydecorator.h ../Base2B/objects/entities/entityfactory.h ../Base2B/objects/entities/flyingentity.h ../Base2B/objects/player/jumpingstickman.h ../Base2B/objects/player/stickman.h ../Base2B/objects/background.h ../Base2B/objects/collision.h ../Base2B/objects/gameobject.h ../Base2B/objects/moon.h ../Base2B/rendering/debugrenderer.h ../Base2B/rendering/renderer.h ../Base2B/coordinate.h ../Base2B/score.h ../Base2B/core/testing/testcases/collisiontest.h ../Base2B/core/testing/testcases/jumptest.h ../Base2B/core/testing/testingdialog.h ../Base2B/core/testing/testrunner.h ../Base2B/core/dialog.h ../Base2B/core/game.h ../Base2B/core/gamestage.h ../Base2B/core/gamestagedecorator.h ../Base2B/core/stage2dialog.h ../Base2B/core/swaprendererstage.h ../Base2B/core/testing/testcases/flyingobstacletest.h ../Base2B/core/stagefactory.h ../Base2B/objects/player/stage3stickman.h ../Base2B/core/stage3dialog.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Base2B/objects/entities/colouredentity.cpp ../Base2B/objects/entities/entity.cpp ../Base2B/objects/entities/entitydecorator.cpp ../Base2B/objects/entities/entityfactory.cpp ../Base2B/objects/entities/flyingentity.cpp ../Base2B/objects/player/jumpingstickman.cpp ../Base2B/objects/player/stickman.cpp ../Base2B/objects/background.cpp ../Base2B/objects/gameobject.cpp ../Base2B/objects/moon.cpp ../Base2B/rendering/debugrenderer.cpp ../Base2B/rendering/renderer.cpp ../Base2B/coordinate.cpp ../Base2B/main.cpp ../Base2B/score.cpp ../Base2B/core/testing/testcases/collisiontest.cpp ../Base2B/core/testing/testcases/jumptest.cpp ../Base2B/core/testing/testingdialog.cpp ../Base2B/core/testing/testrunner.cpp ../Base2B/core/dialog.cpp ../Base2B/core/game.cpp ../Base2B/core/gamestage.cpp ../Base2B/core/gamestagedecorator.cpp ../Base2B/core/stage2dialog.cpp ../Base2B/core/swaprendererstage.cpp ../Base2B/core/testing/testcases/flyingobstacletest.cpp ../Base2B/core/stagefactory.cpp ../Base2B/objects/player/stage3stickman.cpp ../Base2B/core/stage3dialog.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Base2B/objects/entities/colouredentity.h ../Base2B/objects/entities/entity.h ../Base2B/objects/entities/entitydecorator.h ../Base2B/objects/entities/entityfactory.h ../Base2B/objects/entities/flyingentity.h ../Base2B/objects/player/jumpingstickman.h ../Base2B/objects/player/stickman.h ../Base2B/objects/background.h ../Base2B/objects/collision.h ../Base2B/objects/gameobject.h ../Base2B/objects/moon.h ../Base2B/rendering/debugrenderer.h ../Base2B/rendering/renderer.h ../Base2B/coordinate.h ../Base2B/score.h ../Base2B/core/testing/testcases/collisiontest.h ../Base2B/core/testing/testcases/jumptest.h ../Base2B/core/testing/testingdialog.h ../Base2B/core/testing/testrunner.h ../Base2B/core/dialog.h ../Base2B/core/game.h ../Base2B/core/gamestage.h ../Base2B/core/gamestagedecorator.h ../Base2B/core/stage2dialog.h ../Base2B/core/swaprendererstage.h ../Base2B/core/testing/testcases/flyingobstacletest.h ../Base2B/core/stagefactory.h ../Base2B/objects/player/stage3stickman.h ../Base2B/core/stage3dialog.h ../Base2B/objects/player/stickmanstate.h ../Base2B/objects/player/normalstatestickman.h ../Base2B/objects/player/tinystatestickman.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Base2B/objects/entities/colouredentity.cpp ../Base2B/objects/entities/entity.cpp ../Base2B/objects/entities/entitydecorator.cpp ../Base2B/objects/entities/entityfactory.cpp ../Base2B/objects/entities/flyingentity.cpp ../Base2B/objects/player/jumpingstickman.cpp ../Base2B/objects/player/stickman.cpp ../Base2B/objects/background.cpp ../Base2B/objects/gameobject.cpp ../Base2B/objects/moon.cpp ../Base2B/rendering/debugrenderer.cpp ../Base2B/rendering/renderer.cpp ../Base2B/coordinate.cpp ../Base2B/main.cpp ../Base2B/score.cpp ../Base2B/core/testing/testcases/collisiontest.cpp ../Base2B/core/testing/testcases/jumptest.cpp ../Base2B/core/testing/testingdialog.cpp ../Base2B/core/testing/testrunner.cpp ../Base2B/core/dialog.cpp ../Base2B/core/game.cpp ../Base2B/core/gamestage.cpp ../Base2B/core/gamestagedecorator.cpp ../Base2B/core/stage2dialog.cpp ../Base2B/core/swaprendererstage.cpp ../Base2B/core/testing/testcases/flyingobstacletest.cpp ../Base2B/core/stagefactory.cpp ../Base2B/objects/player/stage3stickman.cpp ../Base2B/core/stage3dialog.cpp ../Base2B/objects/player/normalstatestickman.cpp ../Base2B/objects/player/tinystatestickman.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Base2B/dialog.ui $(DISTDIR)/
 
 
@@ -1343,7 +1352,11 @@ stagefactory.o: ../Base2B/core/stagefactory.cpp ../Base2B/core/stagefactory.h \
 		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/QDateTime \
 		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qdatetime.h \
 		../Base2B/core/stage2dialog.h \
-		../Base2B/objects/player/stage3stickman.h
+		../Base2B/core/stage3dialog.h \
+		../Base2B/objects/player/stage3stickman.h \
+		../Base2B/objects/player/normalstatestickman.h \
+		../Base2B/objects/player/stickmanstate.h \
+		../Base2B/objects/player/tinystatestickman.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stagefactory.o ../Base2B/core/stagefactory.cpp
 
 stage3stickman.o: ../Base2B/objects/player/stage3stickman.cpp ../Base2B/objects/player/stage3stickman.h \
@@ -1361,7 +1374,8 @@ stage3stickman.o: ../Base2B/objects/player/stage3stickman.cpp ../Base2B/objects/
 		../Base2B/objects/player/jumpingstickman.h \
 		../Base2B/objects/collision.h \
 		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/QDebug \
-		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qdebug.h
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qdebug.h \
+		../Base2B/objects/player/stickmanstate.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stage3stickman.o ../Base2B/objects/player/stage3stickman.cpp
 
 stage3dialog.o: ../Base2B/core/stage3dialog.cpp ../Base2B/core/stage3dialog.h \
@@ -1389,8 +1403,52 @@ stage3dialog.o: ../Base2B/core/stage3dialog.cpp ../Base2B/core/stage3dialog.h \
 		../Base2B/score.h \
 		../Base2B/objects/entities/entityfactory.h \
 		../Base2B/core/game.h \
-		../Base2B/core/gamestage.h
+		../Base2B/core/gamestage.h \
+		../Base2B/objects/player/stage3stickman.h \
+		../Base2B/objects/player/jumpingstickman.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/QtMath \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qmath.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stage3dialog.o ../Base2B/core/stage3dialog.cpp
+
+normalstatestickman.o: ../Base2B/objects/player/normalstatestickman.cpp ../Base2B/objects/player/normalstatestickman.h \
+		../Base2B/objects/player/stickmanstate.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../Base2B/objects/entities/entity.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QPixmap \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../Base2B/objects/player/stickman.h \
+		../Base2B/objects/gameobject.h \
+		../Base2B/coordinate.h \
+		../Base2B/rendering/renderer.h \
+		../Base2B/objects/player/stage3stickman.h \
+		../Base2B/objects/player/jumpingstickman.h \
+		../Base2B/objects/collision.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o normalstatestickman.o ../Base2B/objects/player/normalstatestickman.cpp
+
+tinystatestickman.o: ../Base2B/objects/player/tinystatestickman.cpp ../Base2B/objects/player/tinystatestickman.h \
+		../Base2B/objects/player/stickmanstate.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../Base2B/objects/entities/entity.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QPixmap \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../Base2B/objects/player/stickman.h \
+		../Base2B/objects/gameobject.h \
+		../Base2B/coordinate.h \
+		../Base2B/rendering/renderer.h \
+		../Base2B/objects/player/stage3stickman.h \
+		../Base2B/objects/player/jumpingstickman.h \
+		../Base2B/objects/collision.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qdebug.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o tinystatestickman.o ../Base2B/objects/player/tinystatestickman.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp

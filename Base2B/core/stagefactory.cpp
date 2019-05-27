@@ -7,10 +7,12 @@
 #include "stage2dialog.h"
 #include "stage3dialog.h"
 #include "stage3stickman.h"
+#include "normalstatestickman.h"
+#include "tinystatestickman.h"
 #include "dialog.h"
 #include "moon.h"
 #include "background.h"
-
+#include "normalstatestickman.h"
 StageFactory::StageFactory(Config config) : config(config) {
 
 }
@@ -22,6 +24,9 @@ std::unique_ptr<GameStage> StageFactory::createStage() {
         player->setSize("normal");//config.size is a string.
         player->setCoordinate(config.coord);
         player->setSprite(":sprites/sprite0.png");
+        player->normal_state = new NormalStateStickman();
+        player->tiny_state = new TinyStateStickman();
+        player->current_state = player->normal_state;
 
         auto factory = std::make_unique<EntityFactory>();
         factory->setVelocity(config.velocity);

@@ -5,7 +5,7 @@
 #include "entity.h"
 #include "jumpingstickman.h"
 
-
+class StickmanState;
 class Stage3Stickman : public JumpingStickman {
 public:
     /**
@@ -21,9 +21,16 @@ public:
                    int gravity = -1,
                    int noOflife = 3);
     ~Stage3Stickman(){};
-    virtual void handleInput(QKeyEvent &event) override;
+    void handleInput(QKeyEvent &event);
+
     int life;
     void update(std::vector<std::unique_ptr<Entity>> &obstacles) override;
+
+    StickmanState* current_state;
+    StickmanState* normal_state;
+    StickmanState* tiny_state;
+
+
 };
 
 #endif // JUMPINGSTICKMAN_H
