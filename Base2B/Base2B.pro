@@ -62,7 +62,9 @@ SOURCES += \
     objects/player/stage3stickman.cpp \
     core/stage3dialog.cpp \
     objects/player/normalstatestickman.cpp \
-    objects/player/tinystatestickman.cpp
+    objects/player/tinystatestickman.cpp \
+    objects/player/largestickmanstate.cpp \
+    objects/player/giantstatestickman.cpp
 
 HEADERS += \
     objects/entities/colouredentity.h \
@@ -96,7 +98,9 @@ HEADERS += \
     core/stage3dialog.h \
     objects/player/stickmanstate.h \
     objects/player/normalstatestickman.h \
-    objects/player/tinystatestickman.h
+    objects/player/tinystatestickman.h \
+    objects/player/giantstatestickman.h \
+    objects/player/largestatestickman.h
 
 FORMS += \
         dialog.ui

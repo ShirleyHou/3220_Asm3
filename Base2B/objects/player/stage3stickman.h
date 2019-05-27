@@ -27,8 +27,12 @@ public:
     void update(std::vector<std::unique_ptr<Entity>> &obstacles) override;
 
     StickmanState* current_state;
+
+
     StickmanState* normal_state;
     StickmanState* tiny_state;
+    StickmanState* large_state;
+    StickmanState* giant_state;
 
 
 };

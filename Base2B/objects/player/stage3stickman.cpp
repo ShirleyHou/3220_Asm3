@@ -12,6 +12,15 @@ void Stage3Stickman::handleInput(QKeyEvent &event) {
     if (event.key()==Qt::Key_T){
         current_state = tiny_state;
     }
+    if (event.key()==Qt::Key_N){
+        current_state = normal_state;
+    }
+    if (event.key()==Qt::Key_L){
+        current_state = large_state;
+    }
+    if (event.key()==Qt::Key_G){
+        current_state = giant_state;
+    }
     if (event.key() == Qt::Key_Space && !event.isAutoRepeat() && canJump()) {
         current_state->jump(this);
         jumpVelocity = jumpImpulse;

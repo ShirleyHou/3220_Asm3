@@ -8,6 +8,8 @@
 #include "stage3dialog.h"
 #include "stage3stickman.h"
 #include "normalstatestickman.h"
+#include "largestatestickman.h"
+#include "giantstatestickman.h"
 #include "tinystatestickman.h"
 #include "dialog.h"
 #include "moon.h"
@@ -26,6 +28,8 @@ std::unique_ptr<GameStage> StageFactory::createStage() {
         player->setSprite(":sprites/sprite0.png");
         player->normal_state = new NormalStateStickman();
         player->tiny_state = new TinyStateStickman();
+        player->large_state = new LargeStateStickman();
+        player->giant_state = new GiantStateStickman();
         player->current_state = player->normal_state;
 
         auto factory = std::make_unique<EntityFactory>();
