@@ -1,6 +1,6 @@
 #include <QBitmap>
 #include "entity.h"
-
+#include <iostream>
 Entity::Entity(std::string name, Coordinate coordinate, int velocity):
     name(name),
     coordinate(coordinate),
@@ -53,6 +53,11 @@ void Entity::updateSprite(unsigned int time) {
     if (name == "cactus" || name == "cloud") {
         return;
     }
+    if (name=="flag"){
+        QPixmap sprite(":sprites/flag.png");
+        setSprite(sprite);
+        return;
+    }
     std::string spritePath = ":sprites/" + name + std::to_string((time/10)%2).append(".png");
     QPixmap sprite(QString::fromStdString(spritePath));
     setSprite(sprite);
@@ -96,6 +101,7 @@ void Cactus::randomiseSprite() {
 Cloud::Cloud(Coordinate coordinate, int velocity):
     Entity("cloud", coordinate, velocity) {
     std::string spritePath = ":/sprites" + name + "0.png";
+
     QPixmap sprite(QString::fromStdString(spritePath));
     this->sprite = sprite;
 }
@@ -105,4 +111,9 @@ void Cloud::randomiseHeight() {
     this->coordinate.setYCoordinate(coordinate.getQtRenderingYCoordinate() + 30*(rand() % 6));
 }
 
+Flag::Flag(Coordinate coordinate, int velocity):
+    Entity("flag", coordinate, velocity){
+    //std::string spritePath =
+    this->sprite = QPixmap(":/sprites/flag.png");
+}
 

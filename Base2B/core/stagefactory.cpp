@@ -37,8 +37,10 @@ std::unique_ptr<GameStage> StageFactory::createStage() {
         factory->setVelocity(config.velocity);
 
         auto stage = std::make_unique<Stage3Dialog>(*config.game, std::move(player), std::move(factory), std::move(*config.obstacles));
+
         genericDialogInitializer(*stage);
         return std::make_unique<SwapRendererStage>(std::move(stage));
+
 
     }else if (config.stage == 2) {
         if (config.testMode) {

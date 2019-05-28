@@ -37,7 +37,7 @@ protected:
 
     virtual void renderBackground(Renderer &renderer, unsigned int counter);
     void renderClouds(Renderer &renderer, unsigned int counter);
-    void renderObstacles(Renderer &renderer, unsigned int counter);
+    virtual void renderObstacles(Renderer &renderer, unsigned int counter);
 
     Game &game;
     std::unique_ptr<Stickman> stickman;

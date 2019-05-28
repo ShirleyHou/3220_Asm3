@@ -65,7 +65,8 @@ SOURCES += \
     objects/player/tinystatestickman.cpp \
     objects/player/largestickmanstate.cpp \
     objects/player/giantstatestickman.cpp \
-    life.cpp
+    life.cpp \
+    objects/memento.cpp
 
 HEADERS += \
     objects/entities/colouredentity.h \
@@ -102,12 +103,15 @@ HEADERS += \
     objects/player/tinystatestickman.h \
     objects/player/giantstatestickman.h \
     objects/player/largestatestickman.h \
-    life.h
+    life.h \
+    objects/memento.h
 
 FORMS += \
         dialog.ui
 
-DISTFILES +=
+DISTFILES += \
+    sprites/Win.png \
+    sprites/GameOver.png
 
 RESOURCES += \
     resources.qrc

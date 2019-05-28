@@ -21,7 +21,7 @@ void Stage2Dialog::spawnObstacles(unsigned int /*counter*/) {
     // Check for collisions between next obstacle and current obstacles
     bool isOverlapping = false;
     for (auto &o : obstacles) {
-        if (Collision::overlaps(*e.first, *o)) {
+        if (Collision::overlaps(*e.first, *o) && o->name!="flag") {
             isOverlapping = true;
             break;
         }

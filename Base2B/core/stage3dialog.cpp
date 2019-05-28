@@ -1,6 +1,8 @@
 #include "stage3dialog.h"
 #include <iostream>
 #include <QtMath>
+#include "collision.h"
+
 Stage3Dialog::Stage3Dialog(Game &game,
                            std::unique_ptr<Stickman> stickman,
                            std::unique_ptr<EntityFactory> factory,
@@ -10,8 +12,10 @@ Stage3Dialog::Stage3Dialog(Game &game,
                  std::move(factory),
                  std::move(obstacleLayout))
 {
-    std::cout<<"stage 3 triggered"<<std::endl;
+
     frameVelocity = background.initialVelocity;
+
+
 
 }
 
@@ -76,6 +80,57 @@ void Stage3Dialog::update() {
 
 void Stage3Dialog::speedUp(unsigned int counter){
 
+}
+
+void Stage3Dialog::spawnObstacles(unsigned int counter){
+    // Check if it's time to spawn an obstacle
+    if (obstacleLayout.size() == 0 || distanceToSpawn > 0) return;
+    if (nextObstacle>=obstacleLayout.size()){
+
+        return;
+    }
+    auto &e = obstacleLayout[nextObstacle];
+
+    // Check for collisions between next obstacle and current obstacles
+    bool isOverlapping = false;
+    for (auto &o : obstacles) {
+        if (e.first->name=="flag"||o->name=="flag"){
+            continue;
+        }
+        if (Collision::overlaps(*e.first, *o)) {
+            isOverlapping = true;
+            break;
+        }
+    }
+
+    // Only spawn the obstacle if it isn't colliding with anything
+    if (!isOverlapping) {
+
+        auto obs = e.first->clone();
+        obs->isLast = e.first->isLast;
+
+        obs->setVelocity(background.getVelocity());
+        addObstacle(std::move(obs));
+
+    }
+
+    // Set next obstacle in sequence
+    distanceToSpawn = e.second;
+    nextObstacle = nextObstacle + 1;
+}
+
+void Stage3Dialog::renderObstacles(Renderer &renderer, unsigned int counter) {
+    bool deleteObstacle = false;
+    for (auto &o: obstacles) {
+
+        o->render(renderer, counter);
+        if (o->getCoordinate().getQtRenderingXCoordinate() + o->width() < -2400) {//do not delete obstacle unless its out of an entire frame.
+            deleteObstacle = true;
+        }
+    }
+    if (deleteObstacle) {
+        obstacles.erase(obstacles.begin());
+    }
 }
 void Stage3Dialog::render(Renderer &renderer) {
     renderBackground(renderer, counter);

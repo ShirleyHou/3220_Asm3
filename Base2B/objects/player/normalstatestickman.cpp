@@ -17,12 +17,10 @@ void NormalStateStickman::update(Stage3Stickman* context, std::vector<std::uniqu
     // Check for collisions
 
     for (auto &other : obstacles) {
+
         Collision::CollisonResult col = Collision::moveCast(*context, *other, 0, context->jumpVelocity);
-        if (!other->passed && other->getCoordinate().getXCoordinate()+other->width() <ac.getXCoordinate()){
-            std::cout<<other->getCoordinate().getXCoordinate()+other->width()<<std::endl;
-            context->score.incrementBy(1);
-            other->passed=true;
-        }
+
+        context->checkPass(other);
         if (col.overlapped) {
             if (!other->collided){
                 context->life->decrement();
@@ -45,6 +43,7 @@ void NormalStateStickman::update(Stage3Stickman* context, std::vector<std::uniqu
             }
         }
     }
+
 
     // Check if we're below the floor
     if (newY <= context->floor) {

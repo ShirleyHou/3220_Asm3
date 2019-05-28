@@ -30,5 +30,8 @@
         <file>sprites/sprite1.png</file>
         <file>config.txt</file>
         <file>sprites/heart.png</file>
+        <file>sprites/flag.png</file>
+        <file>sprites/Win.png</file>
+        <file>sprites/GameOver.png</file>
     </qresource>
 </RCC>

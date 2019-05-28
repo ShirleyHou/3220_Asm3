@@ -33,9 +33,14 @@ public:
     //modified
     bool collided =false;
     bool passed = false;
+    bool isLast = false;
+    int id;
+
+
+    std::string name;//protected
 
 protected:
-    std::string name;
+
     Coordinate coordinate;
     int velocity;
     QPixmap sprite;
@@ -65,6 +70,13 @@ public:
     Cloud(Coordinate coordinate, int velocity);
 
     void randomiseHeight();
+};
+
+class Flag: public Entity{
+public:
+    Flag(Coordinate coordinate, int velocity);
+    //no random height;
+
 };
 
 #endif // OBSTACLE_H

@@ -7,6 +7,7 @@
 #include "score.h"
 #include "life.h"
 class StickmanState;
+class Stage3Dialog;
 class Stage3Stickman : public JumpingStickman {
 public:
     /**
@@ -23,12 +24,15 @@ public:
                    );
     ~Stage3Stickman(){};
     void handleInput(QKeyEvent &event);
-
+    void checkPass(std::unique_ptr<Entity> &other);
     Life* life;
     void update(std::vector<std::unique_ptr<Entity>> &obstacles) override;
     void render(Renderer &renderer, unsigned int time) override;
     Score score;
-
+    bool lost = false;
+    bool win = false;
+    QPixmap* gameOver;
+    QPixmap* gameWin;
     StickmanState* current_state;
 
 

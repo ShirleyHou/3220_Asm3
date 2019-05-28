@@ -123,7 +123,9 @@ OBJECTS       = colouredentity.o \
 		life.o \
 		qrc_resources.o \
 		moc_game.o
-DIST          = ../../../../Qt/5.13.0/clang_64/mkspecs/features/spec_pre.prf \
+DIST          = ../Base2B/sprites/Win.png \
+		../Base2B/sprites/GameOver.png \
+		../../../../Qt/5.13.0/clang_64/mkspecs/features/spec_pre.prf \
 		../../../../Qt/5.13.0/clang_64/mkspecs/qdevice.pri \
 		../../../../Qt/5.13.0/clang_64/mkspecs/features/device_config.prf \
 		../../../../Qt/5.13.0/clang_64/mkspecs/common/unix.conf \
@@ -876,13 +878,16 @@ qrc_resources.cpp: ../Base2B/resources.qrc \
 		../Base2B/sprites/numbers.png \
 		../Base2B/sprites/moon6.png \
 		../Base2B/sprites/heart.png \
+		../Base2B/sprites/flag.png \
 		../Base2B/sprites/cactus0.png \
+		../Base2B/sprites/GameOver.png \
 		../Base2B/sprites/cactus1.png \
 		../Base2B/sprites/cactus2.png \
 		../Base2B/sprites/cloud0.png \
 		../Base2B/sprites/ground.png \
 		../Base2B/sprites/ground1.png \
 		../Base2B/sprites/bird0.png \
+		../Base2B/sprites/Win.png \
 		../Base2B/sprites/bird1.png \
 		../Base2B/sprites/0.png \
 		../Base2B/sprites/1.png \
@@ -1132,7 +1137,8 @@ main.o: ../Base2B/main.cpp ../Base2B/core/dialog.h \
 		../Base2B/core/testing/testcases/flyingobstacletest.h \
 		../Base2B/core/stagefactory.h \
 		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/QString \
-		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qstring.h
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qstring.h \
+		../Base2B/life.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../Base2B/main.cpp
 
 score.o: ../Base2B/score.cpp ../Base2B/score.h \
@@ -1354,6 +1360,7 @@ stagefactory.o: ../Base2B/core/stagefactory.cpp ../Base2B/core/stagefactory.h \
 		../Base2B/objects/background.h \
 		../Base2B/objects/moon.h \
 		../Base2B/score.h \
+		../Base2B/life.h \
 		../Base2B/core/testing/testcases/collisiontest.h \
 		../Base2B/objects/player/jumpingstickman.h \
 		../Base2B/core/testing/testrunner.h \
@@ -1367,7 +1374,6 @@ stagefactory.o: ../Base2B/core/stagefactory.cpp ../Base2B/core/stagefactory.h \
 		../Base2B/core/stage2dialog.h \
 		../Base2B/core/stage3dialog.h \
 		../Base2B/objects/player/stage3stickman.h \
-		../Base2B/life.h \
 		../Base2B/objects/player/normalstatestickman.h \
 		../Base2B/objects/player/stickmanstate.h \
 		../Base2B/objects/player/largestatestickman.h \
@@ -1426,7 +1432,10 @@ stage3dialog.o: ../Base2B/core/stage3dialog.cpp ../Base2B/core/stage3dialog.h \
 		../Base2B/objects/player/jumpingstickman.h \
 		../Base2B/life.h \
 		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/QtMath \
-		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qmath.h
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qmath.h \
+		../Base2B/objects/collision.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/QDebug \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qdebug.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stage3dialog.o ../Base2B/core/stage3dialog.cpp
 
 normalstatestickman.o: ../Base2B/objects/player/normalstatestickman.cpp ../Base2B/objects/player/normalstatestickman.h \

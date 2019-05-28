@@ -1,5 +1,6 @@
 #include "giantstatestickman.h"
 #include "collision.h"
+#include <iostream>
 GiantStateStickman::GiantStateStickman()
 {
 
@@ -18,15 +19,11 @@ void GiantStateStickman::update(Stage3Stickman* context, std::vector<std::unique
     std::vector<int> to_erase;
     int erase_pos = 0;
     for (auto &other : obstacles) {
+
         Collision::CollisonResult col = Collision::moveCast(*context, *other, 0, context->jumpVelocity);
-        if (!other->passed && other->getCoordinate().getXCoordinate()+other->width() <ac.getXCoordinate()){
-            context->score.incrementBy(1);
-            other->passed=true;
-        }
+        context->checkPass(other);
         if (col.overlapped) {
-            if(!other->collided){
-                context->score.incrementBy(100);
-            }
+
             to_erase.push_back(erase_pos);
 
 
