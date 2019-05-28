@@ -26,6 +26,7 @@ std::unique_ptr<GameStage> StageFactory::createStage() {
         player->setSize("normal");//config.size is a string.
         player->setCoordinate(config.coord);
         player->setSprite(":sprites/sprite0.png");
+        player->life = config.life;
         player->normal_state = new NormalStateStickman();
         player->tiny_state = new TinyStateStickman();
         player->large_state = new LargeStateStickman();

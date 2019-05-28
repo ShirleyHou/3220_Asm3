@@ -2,9 +2,8 @@
 #include "collision.h"
 #include <iostream>
 #include "stickmanstate.h"
-Stage3Stickman::Stage3Stickman(int floor, int jumpImpulse, int maxJumpCount, int gravity, int noOfLife) :
+Stage3Stickman::Stage3Stickman(int floor, int jumpImpulse, int maxJumpCount, int gravity) :
     JumpingStickman (floor, jumpImpulse, maxJumpCount, gravity),
-    life (Life()),
     score(Score())
     {
 
@@ -41,6 +40,6 @@ void Stage3Stickman::update(std::vector<std::unique_ptr<Entity>> &obstacles) {
 void Stage3Stickman::render(Renderer &renderer, unsigned int time) {
     Stickman::render(renderer, time);
     score.render(renderer);
-    life.render(renderer);
+    life->render(renderer);
 }
 

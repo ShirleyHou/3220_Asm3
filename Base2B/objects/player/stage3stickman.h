@@ -19,12 +19,12 @@ public:
     Stage3Stickman(int floor,
                    int jumpImpulse = 15,
                    int maxJumpCount = 2,
-                   int gravity = -1,
-                   int noOflife = 3);
+                   int gravity = -1
+                   );
     ~Stage3Stickman(){};
     void handleInput(QKeyEvent &event);
 
-    Life life;
+    Life* life;
     void update(std::vector<std::unique_ptr<Entity>> &obstacles) override;
     void render(Renderer &renderer, unsigned int time) override;
     Score score;

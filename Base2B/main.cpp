@@ -19,6 +19,7 @@
 #include "swaprendererstage.h"
 #include "flyingobstacletest.h"
 #include "stagefactory.h"
+#include "life.h"
 #include <iostream>
 using namespace std;
 
@@ -51,15 +52,23 @@ int main(int argc, char *argv[]) {
 
     Game game;
 
+
+
     // Set up background
     Background background;
     background.setSprite(":ground.png");
     background.setCoordinate(Coordinate(0, 150, 450));
+    //set up life
+    Life life;
 
     StageFactory::Config stageConfig;
     vector<pair<unique_ptr<Entity>, int>> obstacles;
+
+
     stageConfig.obstacles = &obstacles;
     stageConfig.game = &game;
+    stageConfig.life = &life;
+
 
     QFile inputFile(":/config.txt");
     inputFile.open(QIODevice::ReadOnly);
@@ -150,6 +159,8 @@ int main(int argc, char *argv[]) {
             }
         } else if (setting == "testMode:") {
             stageConfig.testMode = value.compare("on") == 0;
+        } else if(setting == "life:"){
+            stageConfig.life->no_life = value.toInt();
         }
         line = stream.readLine();
     };

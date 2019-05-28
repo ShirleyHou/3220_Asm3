@@ -8,7 +8,7 @@
 #include "game.h"
 #include "entityfactory.h"
 #include "dialog.h"
-
+#include "life.h"
 class StageFactory {
 public:
     // This wouldn't be necessary if JSON was used instead of a custom config file format, but rewriting it wasn't an option
@@ -19,6 +19,7 @@ public:
         Coordinate coord;
         int velocity;
         std::string size;
+        Life *life;
 
         Game *game;
         std::vector<std::pair<std::unique_ptr<Entity>, int>> *obstacles;

@@ -25,7 +25,7 @@ void NormalStateStickman::update(Stage3Stickman* context, std::vector<std::uniqu
         }
         if (col.overlapped) {
             if (!other->collided){
-                context->life.decrement();
+                context->life->decrement();
                 other->collided=true;
             }
             int by = other->getCoordinate().getYCoordinate();
