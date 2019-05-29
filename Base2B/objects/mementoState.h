@@ -8,10 +8,9 @@ class MementoState{
 public:
     MementoState(){};
     ~MementoState(){};
-    MementoState(Score score, StickmanState* state, Coordinate coordinate);
+    MementoState(Score score, StickmanState* state);
     Score score;
     StickmanState* state;
-    Coordinate coordinate;
 };
 
 #endif // USERSTATE_H

@@ -2,12 +2,13 @@
 #include "collision.h"
 #include <iostream>
 #include "stickmanstate.h"
+#include "stage3dialog.h"
 Stage3Stickman::Stage3Stickman(int floor, int jumpImpulse, int maxJumpCount, int gravity) :
     JumpingStickman (floor, jumpImpulse, maxJumpCount, gravity),
     score(Score()),
     memento_state(MementoState())
     {
-    memento_state = MementoState(score, current_state, coordinate);
+    memento_state = MementoState(score, current_state);
     gameOver = new QPixmap (":/sprites/GameOver.png");
     gameWin = new QPixmap (":/sprites/Win.png");
 
@@ -26,13 +27,7 @@ void Stage3Stickman::handleInput(QKeyEvent &event) {
     if (event.key()==Qt::Key_G){
         current_state = giant_state;
     }
-    if (event.key()==Qt::Key_S){
-        this->simpleSave();
 
-    }
-    if (event.key()==Qt::Key_R){
-        this->simpleRestore();
-    }
     if (event.key() == Qt::Key_Space && !event.isAutoRepeat() && canJump()) {
         current_state->jump(this);
         jumpVelocity = jumpImpulse;
@@ -45,6 +40,11 @@ void Stage3Stickman::checkPass(std::unique_ptr<Entity> &other){
     if (!other->passed && other->getCoordinate().getXCoordinate()+other->width() <this->getCoordinate().getXCoordinate()){
         if(other->name!="flag"){
             this->score.increment();
+        }else if(other->name=="flag"){
+            //passed a level.
+            this->dialog->simpleSave(); //save dialog
+            std::cout<<"dialog saved with current obstacles size: "<<this->dialog->obstacles.size()<<std::endl;
+            this->simpleSave();//save myself.
         }
         other->passed=true;
         if(other->isLast){
@@ -56,8 +56,15 @@ void Stage3Stickman::checkPass(std::unique_ptr<Entity> &other){
 void Stage3Stickman::update(std::vector<std::unique_ptr<Entity>> &obstacles) {
 
     current_state->update(this, obstacles);
+
     if (life->no_life==0){
         lost = true;
+    }
+    if(reset==true){
+        std::cout<<"triggered reset"<<std::endl;
+        simpleRestore();
+        this->dialog->simpleRestore();
+        reset=false;
     }
 }
 

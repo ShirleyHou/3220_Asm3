@@ -30,7 +30,7 @@ public:
     void setMoon(Moon moon);
     void setScore(int score);
 
-protected:
+//protected:
     virtual void spawnObstacles(unsigned int counter);
     void addObstacle(std::unique_ptr<Entity> obstacle);
     virtual void speedUp(unsigned int counter);

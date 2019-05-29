@@ -28,6 +28,7 @@ void LargeStateStickman::update(Stage3Stickman* context, std::vector<std::unique
             if(!other->collided){
 
                 context->life->decrement();
+                context->reset=true;
                 other->collided=true;
             }
             int by = other->getCoordinate().getYCoordinate();

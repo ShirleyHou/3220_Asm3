@@ -31,6 +31,11 @@ public:
     void renderBackground(Renderer &renderer, unsigned int counter) override;
     void renderObstacles(Renderer &renderer, unsigned int counter) override;
 
+    void simpleSave();
+    void simpleRestore();
+
+    MementoDialogState dialog_memo;
+
 
 
 };

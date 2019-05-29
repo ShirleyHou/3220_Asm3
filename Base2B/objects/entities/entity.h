@@ -30,16 +30,17 @@ public:
     virtual void setVelocity(int v);
 
     virtual std::unique_ptr<Entity> clone();
-    //modified
+
     bool collided =false;
     bool passed = false;
     bool isLast = false;
 
     std::string name;//protected
 
-protected:
 
+protected:
     Coordinate coordinate;
+
     int velocity;
     QPixmap sprite;
     int widthOverride;

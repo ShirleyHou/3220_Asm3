@@ -32,15 +32,16 @@ std::unique_ptr<GameStage> StageFactory::createStage() {
         player->large_state = new LargeStateStickman();
         player->giant_state = new GiantStateStickman();
         player->current_state = player->normal_state;
+        player->reset = false;
         auto factory = std::make_unique<EntityFactory>();
         factory->setVelocity(config.velocity);
-
+        player->simpleSave();
         auto stage = std::make_unique<Stage3Dialog>(*config.game, std::move(player), std::move(factory), std::move(*config.obstacles));
         stage->obstacle_to_spawn = config.level*(config.level-1)*5/2+5*config.level;
         std::cout<<"obstacle_to_spawn: "<<stage->obstacle_to_spawn<<std::endl;
         stage->level = config.level;
         genericDialogInitializer(*stage);
-
+        stage->simpleSave();
         return std::make_unique<SwapRendererStage>(std::move(stage));
 
 

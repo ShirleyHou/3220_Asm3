@@ -171,49 +171,6 @@ int main(int argc, char *argv[]) {
             if (value.toInt()<2){
                 stageConfig.level=2;
             }
-//            int level = value.toInt();
-//            if (level<2){
-//                level = 2;
-//            }
-//            cout<<"here"<<endl;
-//            EntityFactory factory;
-//            int counter = 0;
-//            for(int i=1;i<=level;i++){
-//                for(int j=0;j<5*i;j++){
-//                    auto e = factory.getEntity("bird");
-//                    int y_axis = std::max(std::rand() %3*200-std::rand() %2*20, 150);
-//                    int bird_size = std::rand() %3*10+25;
-//                    int flyRate = std::rand() %3;
-//                    int distance = std::rand() %3*200+std::rand() %2*10;
-//                    e->setSize(bird_size, bird_size);
-//                    e->getCoordinate().setYCoordinate(y_axis);
-//                    e->collided = false;
-//                    e->passed = false;
-//                    e->id = counter;
-//                    if (flyRate != 0) {
-//                        e = make_unique<FlyingEntity>(move(e), flyRate);
-//                    }
-
-//                    // Add the pair (obstacle, spacing_to_next_obstacle) to our obstacle layout
-//                    obstacles.push_back(make_pair(move(e), distance));
-//                    counter++;
-//                }
-
-//                auto e2 = factory.getEntity("flag");
-
-//                e2->setSize(50,100);
-//                e2->getCoordinate().setYCoordinate(150);
-//                e2->collided = false;
-//                e2->passed = false;
-//                if(i==level){
-//                    e2->isLast = true;
-//                    std::cout<<"setted as last"<<std::endl;
-//                }
-//                e2->id = counter;
-//                obstacles.push_back(make_pair(move(e2), 100));
-//                counter++;
-//            }
-//            cout<<"here3"<<endl;
 
         }
 
@@ -221,7 +178,9 @@ int main(int argc, char *argv[]) {
     };
 
     // Construct and set stage
+
     game.setStage(StageFactory(stageConfig).createStage());
+
     game.show();
 
     return a.exec();

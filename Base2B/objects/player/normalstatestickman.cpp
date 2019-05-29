@@ -10,6 +10,7 @@ void NormalStateStickman::jump(Stage3Stickman* self) {
 }
 
 void NormalStateStickman::update(Stage3Stickman* context, std::vector<std::unique_ptr<Entity>> &obstacles) {
+
     context->setSize("normal");
     Coordinate &ac =context->getCoordinate();
     int newY = ac.getYCoordinate() + context->jumpVelocity;
@@ -27,7 +28,9 @@ void NormalStateStickman::update(Stage3Stickman* context, std::vector<std::uniqu
         if (col.overlapped) {
             if (!other->collided){
                 context->life->decrement();
+                context->reset=true;
                 other->collided=true;
+                return;
             }
             int by = other->getCoordinate().getYCoordinate();
             if (col.down && context->jumpVelocity < 0) {
