@@ -9,7 +9,7 @@
 #include <QKeyEvent>
 #include <vector>
 #include <memory>
-
+#include "game.h"
 class Entity;
 class Stickman : public GameObject {
 public:
@@ -32,6 +32,7 @@ public:
     bool isColliding();
     int width();
     int height();
+
 
 //protected, add setter
     bool colliding;

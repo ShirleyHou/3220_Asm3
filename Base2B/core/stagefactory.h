@@ -23,6 +23,7 @@ public:
         int level;
         Game *game;
         std::vector<std::pair<std::unique_ptr<Entity>, int>> *obstacles;
+        int total_obstacles;
     };
 
     /**

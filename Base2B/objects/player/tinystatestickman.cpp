@@ -17,12 +17,11 @@ void TinyStateStickman::update(Stage3Stickman* context, std::vector<std::unique_
     // Check for collisions
     for (auto &other : obstacles) {
         Collision::CollisonResult col = Collision::moveCast(*context, *other, 0, context->jumpVelocity);
-//        if (!other->passed && other->getCoordinate().getXCoordinate()+other->width() <ac.getXCoordinate()){
-//            context->score.incrementBy(1);
-//            other->passed=true;
 
-//        }
         context->checkPass(other);
+        if(other->name=="flag"){
+            continue;
+        }
         if (col.overlapped) {
 
             int by = other->getCoordinate().getYCoordinate();

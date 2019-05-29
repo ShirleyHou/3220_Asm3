@@ -2,12 +2,18 @@
 #define STAGE3STICKMAN_H
 
 #include <memory>
+#include <iostream>
 #include "entity.h"
 #include "jumpingstickman.h"
 #include "score.h"
 #include "life.h"
+#include "mementoState.h"
+#include "memento.h"
+#include "background.h"
 class StickmanState;
+
 class Stage3Dialog;
+
 class Stage3Stickman : public JumpingStickman {
 public:
     /**
@@ -25,6 +31,8 @@ public:
     ~Stage3Stickman(){};
     void handleInput(QKeyEvent &event);
     void checkPass(std::unique_ptr<Entity> &other);
+
+
     Life* life;
     void update(std::vector<std::unique_ptr<Entity>> &obstacles) override;
     void render(Renderer &renderer, unsigned int time) override;
@@ -33,13 +41,43 @@ public:
     bool win = false;
     QPixmap* gameOver;
     QPixmap* gameWin;
+    bool reset = false;
+
+
+
     StickmanState* current_state;
-
-
     StickmanState* normal_state;
     StickmanState* tiny_state;
     StickmanState* large_state;
     StickmanState* giant_state;
+
+
+    Memento* saveToMemento(){
+        return new Memento(memento_state);
+    }
+    void simpleSave(){
+        memento_state = MementoState(score, current_state, coordinate);
+    }
+    void simpleRestore(){
+        MementoState recover_state = memento_state;
+        this->coordinate = recover_state.coordinate;
+        this->score = recover_state.score;
+        this->current_state = recover_state.state;
+        std::cout<<"Simple recovered from last state"<<std::endl;
+    }
+
+    void setMementoState( MementoState new_memento_state){
+        memento_state = new_memento_state;
+    }
+    void restoreFromMomento(Memento mem){
+        MementoState recover_state = mem.savedState;
+        this->coordinate = recover_state.coordinate;
+        this->score = recover_state.score;
+        this->current_state = recover_state.state;
+        std::cout<<"recovered from memento"<<std::endl;
+    }
+
+    MementoState memento_state;
 
 
 };

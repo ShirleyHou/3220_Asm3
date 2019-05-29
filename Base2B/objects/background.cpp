@@ -1,5 +1,5 @@
 #include "background.h"
-
+#include <iostream>
 void Background::setCoordinate(Coordinate coordinate) {
     this->coordinate = coordinate;
 }
@@ -28,4 +28,5 @@ void Background::render(Renderer &renderer, unsigned int /*time*/) {
 
 void Background::update() {
     coordinate.setXCoordinate(coordinate.getQtRenderingXCoordinate() - velocity);
+
 }

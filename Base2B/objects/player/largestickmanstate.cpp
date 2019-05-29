@@ -18,12 +18,12 @@ void LargeStateStickman::update(Stage3Stickman* context, std::vector<std::unique
     // Check for collisions
     for (auto &other : obstacles) {
         Collision::CollisonResult col = Collision::moveCast(*context, *other, 0, context->jumpVelocity);
-//        if (!other->passed && other->getCoordinate().getXCoordinate()+other->width() <ac.getXCoordinate()){
-//            context->score.increment();
-//            other->passed=true;
 
-//        }
         context->checkPass(other);
+        if(other->name=="flag"){
+            continue;
+        }
+
         if (col.overlapped) {
             if(!other->collided){
 

@@ -2,7 +2,7 @@
 #include "ui_dialog.h"
 #include "flyingentity.h"
 #include "collision.h"
-
+#include <iostream>
 Dialog::Dialog(Game &game, std::unique_ptr<Stickman> stickman, std::unique_ptr<EntityFactory> factory):
     game(game),
     stickman(std::move(stickman)),
@@ -107,23 +107,30 @@ void Dialog::renderObstacles(Renderer &renderer, unsigned int counter) {
 #include "colouredentity.h"
 // Spawn a new "obstacle" at random every so often
 void Dialog::spawnObstacles(unsigned int counter) {
+
     if (counter == obstacleSpawnFrame) {
+
         if (rand() % 10 > 6) {
             addObstacle(factory->getEntity("bird"));
         } else {
             addObstacle(factory->getEntity("cactus"));
         }
-        obstacleSpawnFrame += (300 / background.getVelocity()) + ((rand() % 16 )* 3);
+        obstacleSpawnFrame += (300 / (1+background.getVelocity())) + ((rand() % 16 )* 3);
+
     }
 
     if (counter == cloudSpawnFrame) {
         clouds.push_back(factory->getEntity("cloud"));
-        cloudSpawnFrame += ((450 / background.getVelocity()) + (rand() % 64) * 3);
+        cloudSpawnFrame += ((450 / (1+background.getVelocity())) + (rand() % 64) * 3);
     }
 }
 
 void Dialog::addObstacle(std::unique_ptr<Entity> obstacle) {
+
+
     obstacles.push_back(std::move(obstacle));
+
+
 }
 
 // Incrementally speed up the scrolling speed

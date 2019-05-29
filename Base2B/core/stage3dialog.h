@@ -18,11 +18,16 @@ public:
     void speedUp(unsigned int counter) override;
 
     int frameVelocity = 0;
-    int moveImpulse = 20;
-    int end = false;
+
+
+    int obstacle_to_spawn = 0;
+    int obstacle_on_current_level = 0;
+    int level;
+    int current_level = 1;
+
     void moveLeft();
     void moveRight();
-    void spawnObstacles(unsigned int counter);
+    void spawnObstacles(unsigned int counter) override;
     void renderBackground(Renderer &renderer, unsigned int counter) override;
     void renderObstacles(Renderer &renderer, unsigned int counter) override;
 

@@ -15,8 +15,6 @@ Stage3Dialog::Stage3Dialog(Game &game,
 
     frameVelocity = background.initialVelocity;
 
-
-
 }
 
 void Stage3Dialog::moveLeft(){
@@ -57,20 +55,17 @@ void Stage3Dialog::update() {
         }
     }
 
+    //Stage3Stickman& stick3 = dynamic_cast<Stage3Stickman&>(*stickman);
 
     stickman->update(obstacles);
     if (!stickman->isColliding()) {
-        // Reduce distance to next obstacle
-        distanceToSpawn -= background.getVelocity();
+
         background.update();
 
 
     }
     spawnObstacles(counter);
 
-    for (auto &c : clouds) {
-        c->collisionLogic(*stickman);
-    }
 
     for (auto &o : obstacles) {
 
@@ -82,45 +77,90 @@ void Stage3Dialog::speedUp(unsigned int counter){
 
 }
 
-void Stage3Dialog::spawnObstacles(unsigned int counter){
-    // Check if it's time to spawn an obstacle
-    if (obstacleLayout.size() == 0 || distanceToSpawn > 0) return;
-    if (nextObstacle>=obstacleLayout.size()){
 
+void Stage3Dialog::spawnObstacles(unsigned int counter) {
+    if(obstacle_to_spawn==-1){
         return;
     }
-    auto &e = obstacleLayout[nextObstacle];
-
-    // Check for collisions between next obstacle and current obstacles
-    bool isOverlapping = false;
-    for (auto &o : obstacles) {
-        if (e.first->name=="flag"||o->name=="flag"){
-            continue;
+    if(counter == obstacleSpawnFrame && (obstacle_on_current_level==current_level*5 ||obstacle_to_spawn==0) ){
+        std::unique_ptr<Entity> e;
+        e = factory->getEntity("flag");
+        if(obstacle_to_spawn==0){
+            e->isLast = true;
         }
-        if (Collision::overlaps(*e.first, *o)) {
-            isOverlapping = true;
-            break;
-        }
+        addObstacle(std::move(e));
+        obstacleSpawnFrame += (300 / (1+background.getVelocity())) + ((rand() % 16 )* 3);
+        obstacle_to_spawn--;
+        obstacle_on_current_level=0;
+        current_level+=1;
     }
 
-    // Only spawn the obstacle if it isn't colliding with anything
-    if (!isOverlapping) {
+    if (counter == obstacleSpawnFrame) {
+        //std::cout<<obstacleSpawnFrame<<std::endl;
+        std::unique_ptr<Entity> e;
+        if (rand() % 10 > 6) {
+            e = factory->getEntity("bird");
+        } else {
+            e = factory->getEntity("cactus");
+        }
 
-        auto obs = e.first->clone();
-        obs->isLast = e.first->isLast;
+        addObstacle(std::move(e));
+        obstacleSpawnFrame += (300 / (1+background.getVelocity())) + ((rand() % 16 )* 3);
+        obstacle_to_spawn--;
+        obstacle_on_current_level++;
 
-        obs->setVelocity(background.getVelocity());
-        addObstacle(std::move(obs));
 
     }
 
-    // Set next obstacle in sequence
-    distanceToSpawn = e.second;
-    nextObstacle = nextObstacle + 1;
+
+
 }
 
+//void Dialog::addObstacle(std::unique_ptr<Entity> obstacle) {
+//    obstacles.push_back(std::move(obstacle));
+//}
+
+//void Stage3Dialog::spawnObstacles(unsigned int counter){
+    // Check if it's time to spawn an obstacle
+//    if (obstacleLayout.size() == 0 || distanceToSpawn > 0) return;
+//    if (nextObstacle>=obstacleLayout.size()){
+
+//        return;
+//    }
+//    auto &e = obstacleLayout[nextObstacle];
+
+//    // Check for collisions between next obstacle and current obstacles
+//    bool isOverlapping = false;
+//    for (auto &o : obstacles) {
+//        if (e.first->name=="flag"||o->name=="flag"){
+//            continue;
+//        }
+//        if (Collision::overlaps(*e.first, *o)) {
+//            isOverlapping = true;
+//            break;
+//        }
+//    }
+
+//    // Only spawn the obstacle if it isn't colliding with anything
+//    if (!isOverlapping) {
+
+//        auto obs = e.first->clone();
+//        obs->isLast = e.first->isLast;
+
+//        obs->setVelocity(background.getVelocity());
+//        addObstacle(std::move(obs));
+
+//    }
+
+//    // Set next obstacle in sequence
+//    distanceToSpawn = e.second;
+//    nextObstacle = nextObstacle + 1;
+//}
+
 void Stage3Dialog::renderObstacles(Renderer &renderer, unsigned int counter) {
+
     bool deleteObstacle = false;
+
     for (auto &o: obstacles) {
 
         o->render(renderer, counter);
@@ -129,6 +169,7 @@ void Stage3Dialog::renderObstacles(Renderer &renderer, unsigned int counter) {
         }
     }
     if (deleteObstacle) {
+
         obstacles.erase(obstacles.begin());
     }
 }

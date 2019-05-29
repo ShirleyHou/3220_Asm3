@@ -21,6 +21,9 @@ void NormalStateStickman::update(Stage3Stickman* context, std::vector<std::uniqu
         Collision::CollisonResult col = Collision::moveCast(*context, *other, 0, context->jumpVelocity);
 
         context->checkPass(other);
+        if(other->name=="flag"){
+            continue;
+        }
         if (col.overlapped) {
             if (!other->collided){
                 context->life->decrement();

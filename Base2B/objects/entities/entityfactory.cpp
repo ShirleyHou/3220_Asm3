@@ -35,6 +35,7 @@ std::unique_ptr<Entity> EntityFactory::getEntity(std::string name) {
     } else if (name=="flag"){
         Coordinate coordinate(800, 160, 450);
         auto levelflag = std::make_unique<Flag>(coordinate, velocity);
+
         return std::move(levelflag);
     }
 }

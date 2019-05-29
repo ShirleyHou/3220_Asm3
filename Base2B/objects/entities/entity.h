@@ -34,8 +34,6 @@ public:
     bool collided =false;
     bool passed = false;
     bool isLast = false;
-    int id;
-
 
     std::string name;//protected
 

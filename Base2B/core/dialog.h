@@ -50,7 +50,7 @@ protected:
 
     Moon moon;
 
-private:
+
     bool night;
     unsigned int obstacleSpawnFrame;
     unsigned int cloudSpawnFrame;

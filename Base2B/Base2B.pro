@@ -66,7 +66,8 @@ SOURCES += \
     objects/player/largestickmanstate.cpp \
     objects/player/giantstatestickman.cpp \
     life.cpp \
-    objects/memento.cpp
+    objects/memento.cpp \
+    objects/mementoState.cpp
 
 HEADERS += \
     objects/entities/colouredentity.h \
@@ -104,7 +105,8 @@ HEADERS += \
     objects/player/giantstatestickman.h \
     objects/player/largestatestickman.h \
     life.h \
-    objects/memento.h
+    objects/memento.h \
+    objects/mementoState.h
 
 FORMS += \
         dialog.ui

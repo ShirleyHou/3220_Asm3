@@ -22,12 +22,15 @@ void GiantStateStickman::update(Stage3Stickman* context, std::vector<std::unique
 
         Collision::CollisonResult col = Collision::moveCast(*context, *other, 0, context->jumpVelocity);
         context->checkPass(other);
-        if (col.overlapped) {
+
+        if (col.overlapped && other->passed==false && other->name!="flag") {
 
             to_erase.push_back(erase_pos);
-
+            context->score.increment();
+            other->passed=true;
 
         }
+        erase_pos++;
 
     }
     //does erase

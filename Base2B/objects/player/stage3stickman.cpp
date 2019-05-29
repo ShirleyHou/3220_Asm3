@@ -4,8 +4,10 @@
 #include "stickmanstate.h"
 Stage3Stickman::Stage3Stickman(int floor, int jumpImpulse, int maxJumpCount, int gravity) :
     JumpingStickman (floor, jumpImpulse, maxJumpCount, gravity),
-    score(Score())
+    score(Score()),
+    memento_state(MementoState())
     {
+    memento_state = MementoState(score, current_state, coordinate);
     gameOver = new QPixmap (":/sprites/GameOver.png");
     gameWin = new QPixmap (":/sprites/Win.png");
 
@@ -24,6 +26,13 @@ void Stage3Stickman::handleInput(QKeyEvent &event) {
     if (event.key()==Qt::Key_G){
         current_state = giant_state;
     }
+    if (event.key()==Qt::Key_S){
+        this->simpleSave();
+
+    }
+    if (event.key()==Qt::Key_R){
+        this->simpleRestore();
+    }
     if (event.key() == Qt::Key_Space && !event.isAutoRepeat() && canJump()) {
         current_state->jump(this);
         jumpVelocity = jumpImpulse;
@@ -34,7 +43,9 @@ void Stage3Stickman::handleInput(QKeyEvent &event) {
 }
 void Stage3Stickman::checkPass(std::unique_ptr<Entity> &other){
     if (!other->passed && other->getCoordinate().getXCoordinate()+other->width() <this->getCoordinate().getXCoordinate()){
-        this->score.increment();
+        if(other->name!="flag"){
+            this->score.increment();
+        }
         other->passed=true;
         if(other->isLast){
             win = true;
@@ -55,8 +66,10 @@ void Stage3Stickman::render(Renderer &renderer, unsigned int time) {
     score.render(renderer);
     life->render(renderer);
     if(lost){
+
         renderer.draw(100,100,*gameOver);
     }else if(win){
+
         renderer.draw(100,100,*gameWin);
     }
 
