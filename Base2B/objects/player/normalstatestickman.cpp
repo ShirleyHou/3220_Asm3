@@ -16,21 +16,35 @@ void NormalStateStickman::update(Stage3Stickman* context, std::vector<std::uniqu
     int newY = ac.getYCoordinate() + context->jumpVelocity;
     context->colliding = false;
     // Check for collisions
-
+    std::vector<int> to_erase;
+    int erase_pos = 0;
     for (auto &other : obstacles) {
 
         Collision::CollisonResult col = Collision::moveCast(*context, *other, 0, context->jumpVelocity);
 
         context->checkPass(other);
         if(other->name=="flag"){
+            erase_pos++;
             continue;
         }
         if (col.overlapped) {
+
             if (!other->collided){
+                if(other->name!="heart"){
                 context->life->decrement();
                 context->reset=true;
                 other->collided=true;
+
+                erase_pos++;
                 return;
+                }else{
+                    context->life->increment();
+                    other->collided=true;
+                    to_erase.push_back(erase_pos);
+
+                }
+
+
             }
             int by = other->getCoordinate().getYCoordinate();
             if (col.down && context->jumpVelocity < 0) {
@@ -48,6 +62,13 @@ void NormalStateStickman::update(Stage3Stickman* context, std::vector<std::uniqu
                 context->colliding = true;
             }
         }
+        erase_pos++;
+
+    }
+    //does erase
+    for (auto it = to_erase.rbegin(); it != to_erase.rend(); ++it){
+        int i = *it;
+        obstacles.erase(obstacles.begin()+i);
     }
 
 

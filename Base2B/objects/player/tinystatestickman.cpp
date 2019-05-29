@@ -23,7 +23,10 @@ void TinyStateStickman::update(Stage3Stickman* context, std::vector<std::unique_
             continue;
         }
         if (col.overlapped) {
-
+            if(other->name=="heart" && other->collided==false){
+                context->life->increment();
+                other->collided=true;
+            }
             int by = other->getCoordinate().getYCoordinate();
             if (col.down && context->jumpVelocity < 0) {
                 // Hitting obstacle from above

@@ -77,5 +77,11 @@ public:
     //no random height;
 
 };
+class Heart: public Entity{
+public:
+    Heart(Coordinate coordinate, int velocity);
+    //no random height;
+
+};
 
 #endif // OBSTACLE_H

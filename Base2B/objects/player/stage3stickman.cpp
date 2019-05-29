@@ -38,12 +38,11 @@ void Stage3Stickman::handleInput(QKeyEvent &event) {
 }
 void Stage3Stickman::checkPass(std::unique_ptr<Entity> &other){
     if (!other->passed && other->getCoordinate().getXCoordinate()+other->width() <this->getCoordinate().getXCoordinate()){
-        if(other->name!="flag"){
+        if(other->name!="flag"||other->name!="heart"){
             this->score.increment();
         }else if(other->name=="flag"){
             //passed a level.
             this->dialog->simpleSave(); //save dialog
-            std::cout<<"dialog saved with current obstacles size: "<<this->dialog->obstacles.size()<<std::endl;
             this->simpleSave();//save myself.
         }
         other->passed=true;

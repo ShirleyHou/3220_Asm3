@@ -26,10 +26,16 @@ void LargeStateStickman::update(Stage3Stickman* context, std::vector<std::unique
 
         if (col.overlapped) {
             if(!other->collided){
-
+                if(other->name!="heart"){
                 context->life->decrement();
                 context->reset=true;
                 other->collided=true;
+                return;
+                }else{
+                    context->life->increment();
+                    other->collided=true;
+                }
+
             }
             int by = other->getCoordinate().getYCoordinate();
             if (col.down && context->jumpVelocity < 0) {

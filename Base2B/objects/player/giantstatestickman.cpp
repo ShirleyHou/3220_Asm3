@@ -24,7 +24,10 @@ void GiantStateStickman::update(Stage3Stickman* context, std::vector<std::unique
         context->checkPass(other);
 
         if (col.overlapped && other->passed==false && other->name!="flag") {
-
+            if(other->name=="heart" && other->collided==false){
+                context->life->increment();
+                other->collided=true;
+            }
             to_erase.push_back(erase_pos);
             context->score.increment();
             other->passed=true;

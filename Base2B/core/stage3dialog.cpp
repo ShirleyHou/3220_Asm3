@@ -112,11 +112,15 @@ void Stage3Dialog::spawnObstacles(unsigned int counter) {
     if (counter == obstacleSpawnFrame) {
 
         std::unique_ptr<Entity> e;
-        if (rand() % 10 > 6) {
+        int random = rand()%10;
+        if (random<=1){
+            e = factory->getEntity("heart");
+        }else if(random<=5){
             e = factory->getEntity("bird");
         } else {
             e = factory->getEntity("cactus");
         }
+
 
         addObstacle(std::move(e));
         obstacleSpawnFrame += (300 / (1+background.getVelocity())) + ((rand() % 16 )* 3);

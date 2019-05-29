@@ -33,5 +33,6 @@
         <file>sprites/flag.png</file>
         <file>sprites/Win.png</file>
         <file>sprites/GameOver.png</file>
+        <file>sprites/heart_powerup.png</file>
     </qresource>
 </RCC>

@@ -894,6 +894,7 @@ qrc_resources.cpp: ../Base2B/resources.qrc \
 		../Base2B/sprites/cactus0.png \
 		../Base2B/sprites/GameOver.png \
 		../Base2B/sprites/cactus1.png \
+		../Base2B/sprites/heart_powerup.png \
 		../Base2B/sprites/cactus2.png \
 		../Base2B/sprites/cloud0.png \
 		../Base2B/sprites/ground.png \
@@ -1459,7 +1460,16 @@ stage3stickman.o: ../Base2B/objects/player/stage3stickman.cpp ../Base2B/objects/
 		../Base2B/objects/collision.h \
 		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/QDebug \
 		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qdebug.h \
-		../Base2B/objects/player/stickmanstate.h
+		../Base2B/objects/player/stickmanstate.h \
+		../Base2B/core/stage3dialog.h \
+		../Base2B/core/stage2dialog.h \
+		../Base2B/core/dialog.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../Base2B/objects/moon.h \
+		../Base2B/objects/entities/entityfactory.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stage3stickman.o ../Base2B/objects/player/stage3stickman.cpp
 
 stage3dialog.o: ../Base2B/core/stage3dialog.cpp ../Base2B/core/stage3dialog.h \
@@ -1638,7 +1648,16 @@ memento.o: ../Base2B/objects/memento.cpp ../Base2B/objects/memento.h \
 		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
 		../Base2B/rendering/renderer.h \
 		../Base2B/coordinate.h \
-		../Base2B/objects/mementodialogstate.h
+		../Base2B/objects/mementodialogstate.h \
+		../Base2B/objects/entities/entity.h \
+		../Base2B/objects/player/stickman.h \
+		../Base2B/objects/gameobject.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../Base2B/core/game.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../Base2B/core/gamestage.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o memento.o ../Base2B/objects/memento.cpp
 
 mementoState.o: ../Base2B/objects/mementoState.cpp ../Base2B/objects/mementoState.h \
@@ -1652,14 +1671,21 @@ mementoState.o: ../Base2B/objects/mementoState.cpp ../Base2B/objects/mementoStat
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mementoState.o ../Base2B/objects/mementoState.cpp
 
 mementodialogstate.o: ../Base2B/objects/mementodialogstate.cpp ../Base2B/objects/mementodialogstate.h \
-		../Base2B/objects/mementoState.h \
-		../Base2B/score.h \
-		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QPainter \
-		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../Base2B/objects/entities/entity.h \
 		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QPixmap \
 		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../Base2B/objects/player/stickman.h \
+		../Base2B/objects/gameobject.h \
+		../Base2B/coordinate.h \
 		../Base2B/rendering/renderer.h \
-		../Base2B/coordinate.h
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../Base2B/core/game.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../Base2B/core/gamestage.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mementodialogstate.o ../Base2B/objects/mementodialogstate.cpp
 
 qrc_resources.o: qrc_resources.cpp 

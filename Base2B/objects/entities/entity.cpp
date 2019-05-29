@@ -58,6 +58,11 @@ void Entity::updateSprite(unsigned int time) {
         setSprite(sprite);
         return;
     }
+    if (name=="heart"){
+        QPixmap sprite(":sprites/heart_powerup.png");
+        setSprite(sprite);
+        return;
+    }
     std::string spritePath = ":sprites/" + name + std::to_string((time/10)%2).append(".png");
     QPixmap sprite(QString::fromStdString(spritePath));
     setSprite(sprite);
@@ -117,3 +122,7 @@ Flag::Flag(Coordinate coordinate, int velocity):
     this->sprite = QPixmap(":/sprites/flag.png");
 }
 
+Heart::Heart(Coordinate coordinate, int velocity):
+    Entity("heart", coordinate, velocity){
+    this->sprite = QPixmap(":/sprites/heart_powerup.png");
+}
