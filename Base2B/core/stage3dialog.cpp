@@ -42,7 +42,6 @@ void Stage3Dialog::update() {
     Stage3Stickman& stick3 = dynamic_cast<Stage3Stickman&>(*stickman);
 
     if(stick3.win||stick3.lost){
-        std::cout<<stick3.win <<stick3.lost<<std::endl;
         return;
     }
     if(game.longPressed==false){
