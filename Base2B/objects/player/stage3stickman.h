@@ -52,10 +52,6 @@ public:
     StickmanState* large_state;
     StickmanState* giant_state;
 
-
-//    Memento* saveToMemento(){
-//        return new Memento(memento_state);
-//    }
     void simpleSave(){
         memento_state = MementoState(score, current_state);
 
@@ -67,18 +63,9 @@ public:
         std::cout<<"Stickman Simple recovered from last state"<<std::endl;
     }
 
-//    void setMementoState( MementoState new_memento_state){
-//        memento_state = new_memento_state;
-//    }
-//    void restoreFromMomento(Memento mem){
-//        MementoState recover_state = mem.savedState;
-//        this->coordinate = recover_state.coordinate;
-//        this->score = recover_state.score;
-//        this->current_state = recover_state.state;
-//        std::cout<<"recovered from memento"<<std::endl;
-//    }
 
     MementoState memento_state;
+    MementoState initial_memento_state;
     Stage3Dialog* dialog;//for notify purpose
 
 };

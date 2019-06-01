@@ -15,6 +15,8 @@
 #include "moon.h"
 #include "background.h"
 #include "normalstatestickman.h"
+#include "loselifetest.h"
+#include "switchstatetest.h"
 StageFactory::StageFactory(Config config) : config(config) {
 
 }
@@ -49,9 +51,12 @@ std::unique_ptr<GameStage> StageFactory::createStage() {
         if (config.testMode) {
             // Stage 2 test mode
             std::vector<std::unique_ptr<TestRunner>> tests;
+            tests.push_back(std::make_unique<SwitchStateTest>());
+            tests.push_back(std::make_unique<LoseLifeTest>());
             tests.push_back(std::make_unique<CollisionTest>());
             tests.push_back(std::make_unique<JumpTest>());
             tests.push_back(std::make_unique<FlyingObstacleTest>());
+
 
             std::unique_ptr<GameStage> tester = std::make_unique<TestingDialog>(std::move(tests));
             return std::make_unique<SwapRendererStage>(std::move(tester));

@@ -88,7 +88,10 @@ SOURCES       = ../Base2B/objects/entities/colouredentity.cpp \
 		../Base2B/life.cpp \
 		../Base2B/objects/memento.cpp \
 		../Base2B/objects/mementoState.cpp \
-		../Base2B/objects/mementodialogstate.cpp qrc_resources.cpp \
+		../Base2B/objects/mementodialogstate.cpp \
+		../Base2B/core/testing/testcases/loselifetest.cpp \
+		../Base2B/core/testing/testcases/switchstatetest.cpp \
+		../Base2B/core/testing/testcases/giantcollisiontest.cpp qrc_resources.cpp \
 		moc_game.cpp
 OBJECTS       = colouredentity.o \
 		entity.o \
@@ -127,6 +130,9 @@ OBJECTS       = colouredentity.o \
 		memento.o \
 		mementoState.o \
 		mementodialogstate.o \
+		loselifetest.o \
+		switchstatetest.o \
+		giantcollisiontest.o \
 		qrc_resources.o \
 		moc_game.o
 DIST          = ../Base2B/sprites/Win.png \
@@ -361,7 +367,10 @@ DIST          = ../Base2B/sprites/Win.png \
 		../Base2B/life.h \
 		../Base2B/objects/memento.h \
 		../Base2B/objects/mementoState.h \
-		../Base2B/objects/mementodialogstate.h ../Base2B/objects/entities/colouredentity.cpp \
+		../Base2B/objects/mementodialogstate.h \
+		../Base2B/core/testing/testcases/loselifetest.h \
+		../Base2B/core/testing/testcases/switchstatetest.h \
+		../Base2B/core/testing/testcases/giantstatecollisiontest.h ../Base2B/objects/entities/colouredentity.cpp \
 		../Base2B/objects/entities/entity.cpp \
 		../Base2B/objects/entities/entitydecorator.cpp \
 		../Base2B/objects/entities/entityfactory.cpp \
@@ -397,7 +406,10 @@ DIST          = ../Base2B/sprites/Win.png \
 		../Base2B/life.cpp \
 		../Base2B/objects/memento.cpp \
 		../Base2B/objects/mementoState.cpp \
-		../Base2B/objects/mementodialogstate.cpp
+		../Base2B/objects/mementodialogstate.cpp \
+		../Base2B/core/testing/testcases/loselifetest.cpp \
+		../Base2B/core/testing/testcases/switchstatetest.cpp \
+		../Base2B/core/testing/testcases/giantcollisiontest.cpp
 QMAKE_TARGET  = Base2B
 DESTDIR       = 
 TARGET        = Base2B.app/Contents/MacOS/Base2B
@@ -848,8 +860,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../Base2B/resources.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../../Qt/5.13.0/clang_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../Base2B/objects/entities/colouredentity.h ../Base2B/objects/entities/entity.h ../Base2B/objects/entities/entitydecorator.h ../Base2B/objects/entities/entityfactory.h ../Base2B/objects/entities/flyingentity.h ../Base2B/objects/player/jumpingstickman.h ../Base2B/objects/player/stickman.h ../Base2B/objects/background.h ../Base2B/objects/collision.h ../Base2B/objects/gameobject.h ../Base2B/objects/moon.h ../Base2B/rendering/debugrenderer.h ../Base2B/rendering/renderer.h ../Base2B/coordinate.h ../Base2B/score.h ../Base2B/core/testing/testcases/collisiontest.h ../Base2B/core/testing/testcases/jumptest.h ../Base2B/core/testing/testingdialog.h ../Base2B/core/testing/testrunner.h ../Base2B/core/dialog.h ../Base2B/core/game.h ../Base2B/core/gamestage.h ../Base2B/core/gamestagedecorator.h ../Base2B/core/stage2dialog.h ../Base2B/core/swaprendererstage.h ../Base2B/core/testing/testcases/flyingobstacletest.h ../Base2B/core/stagefactory.h ../Base2B/objects/player/stage3stickman.h ../Base2B/core/stage3dialog.h ../Base2B/objects/player/stickmanstate.h ../Base2B/objects/player/normalstatestickman.h ../Base2B/objects/player/tinystatestickman.h ../Base2B/objects/player/giantstatestickman.h ../Base2B/objects/player/largestatestickman.h ../Base2B/life.h ../Base2B/objects/memento.h ../Base2B/objects/mementoState.h ../Base2B/objects/mementodialogstate.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../Base2B/objects/entities/colouredentity.cpp ../Base2B/objects/entities/entity.cpp ../Base2B/objects/entities/entitydecorator.cpp ../Base2B/objects/entities/entityfactory.cpp ../Base2B/objects/entities/flyingentity.cpp ../Base2B/objects/player/jumpingstickman.cpp ../Base2B/objects/player/stickman.cpp ../Base2B/objects/background.cpp ../Base2B/objects/gameobject.cpp ../Base2B/objects/moon.cpp ../Base2B/rendering/debugrenderer.cpp ../Base2B/rendering/renderer.cpp ../Base2B/coordinate.cpp ../Base2B/main.cpp ../Base2B/score.cpp ../Base2B/core/testing/testcases/collisiontest.cpp ../Base2B/core/testing/testcases/jumptest.cpp ../Base2B/core/testing/testingdialog.cpp ../Base2B/core/testing/testrunner.cpp ../Base2B/core/dialog.cpp ../Base2B/core/game.cpp ../Base2B/core/gamestage.cpp ../Base2B/core/gamestagedecorator.cpp ../Base2B/core/stage2dialog.cpp ../Base2B/core/swaprendererstage.cpp ../Base2B/core/testing/testcases/flyingobstacletest.cpp ../Base2B/core/stagefactory.cpp ../Base2B/objects/player/stage3stickman.cpp ../Base2B/core/stage3dialog.cpp ../Base2B/objects/player/normalstatestickman.cpp ../Base2B/objects/player/tinystatestickman.cpp ../Base2B/objects/player/largestickmanstate.cpp ../Base2B/objects/player/giantstatestickman.cpp ../Base2B/life.cpp ../Base2B/objects/memento.cpp ../Base2B/objects/mementoState.cpp ../Base2B/objects/mementodialogstate.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../Base2B/objects/entities/colouredentity.h ../Base2B/objects/entities/entity.h ../Base2B/objects/entities/entitydecorator.h ../Base2B/objects/entities/entityfactory.h ../Base2B/objects/entities/flyingentity.h ../Base2B/objects/player/jumpingstickman.h ../Base2B/objects/player/stickman.h ../Base2B/objects/background.h ../Base2B/objects/collision.h ../Base2B/objects/gameobject.h ../Base2B/objects/moon.h ../Base2B/rendering/debugrenderer.h ../Base2B/rendering/renderer.h ../Base2B/coordinate.h ../Base2B/score.h ../Base2B/core/testing/testcases/collisiontest.h ../Base2B/core/testing/testcases/jumptest.h ../Base2B/core/testing/testingdialog.h ../Base2B/core/testing/testrunner.h ../Base2B/core/dialog.h ../Base2B/core/game.h ../Base2B/core/gamestage.h ../Base2B/core/gamestagedecorator.h ../Base2B/core/stage2dialog.h ../Base2B/core/swaprendererstage.h ../Base2B/core/testing/testcases/flyingobstacletest.h ../Base2B/core/stagefactory.h ../Base2B/objects/player/stage3stickman.h ../Base2B/core/stage3dialog.h ../Base2B/objects/player/stickmanstate.h ../Base2B/objects/player/normalstatestickman.h ../Base2B/objects/player/tinystatestickman.h ../Base2B/objects/player/giantstatestickman.h ../Base2B/objects/player/largestatestickman.h ../Base2B/life.h ../Base2B/objects/memento.h ../Base2B/objects/mementoState.h ../Base2B/objects/mementodialogstate.h ../Base2B/core/testing/testcases/loselifetest.h ../Base2B/core/testing/testcases/switchstatetest.h ../Base2B/core/testing/testcases/giantstatecollisiontest.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../Base2B/objects/entities/colouredentity.cpp ../Base2B/objects/entities/entity.cpp ../Base2B/objects/entities/entitydecorator.cpp ../Base2B/objects/entities/entityfactory.cpp ../Base2B/objects/entities/flyingentity.cpp ../Base2B/objects/player/jumpingstickman.cpp ../Base2B/objects/player/stickman.cpp ../Base2B/objects/background.cpp ../Base2B/objects/gameobject.cpp ../Base2B/objects/moon.cpp ../Base2B/rendering/debugrenderer.cpp ../Base2B/rendering/renderer.cpp ../Base2B/coordinate.cpp ../Base2B/main.cpp ../Base2B/score.cpp ../Base2B/core/testing/testcases/collisiontest.cpp ../Base2B/core/testing/testcases/jumptest.cpp ../Base2B/core/testing/testingdialog.cpp ../Base2B/core/testing/testrunner.cpp ../Base2B/core/dialog.cpp ../Base2B/core/game.cpp ../Base2B/core/gamestage.cpp ../Base2B/core/gamestagedecorator.cpp ../Base2B/core/stage2dialog.cpp ../Base2B/core/swaprendererstage.cpp ../Base2B/core/testing/testcases/flyingobstacletest.cpp ../Base2B/core/stagefactory.cpp ../Base2B/objects/player/stage3stickman.cpp ../Base2B/core/stage3dialog.cpp ../Base2B/objects/player/normalstatestickman.cpp ../Base2B/objects/player/tinystatestickman.cpp ../Base2B/objects/player/largestickmanstate.cpp ../Base2B/objects/player/giantstatestickman.cpp ../Base2B/life.cpp ../Base2B/objects/memento.cpp ../Base2B/objects/mementoState.cpp ../Base2B/objects/mementodialogstate.cpp ../Base2B/core/testing/testcases/loselifetest.cpp ../Base2B/core/testing/testcases/switchstatetest.cpp ../Base2B/core/testing/testcases/giantcollisiontest.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../Base2B/dialog.ui $(DISTDIR)/
 
 
@@ -1431,7 +1443,9 @@ stagefactory.o: ../Base2B/core/stagefactory.cpp ../Base2B/core/stagefactory.h \
 		../Base2B/objects/player/stickmanstate.h \
 		../Base2B/objects/player/largestatestickman.h \
 		../Base2B/objects/player/giantstatestickman.h \
-		../Base2B/objects/player/tinystatestickman.h
+		../Base2B/objects/player/tinystatestickman.h \
+		../Base2B/core/testing/testcases/loselifetest.h \
+		../Base2B/core/testing/testcases/switchstatetest.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o stagefactory.o ../Base2B/core/stagefactory.cpp
 
 stage3stickman.o: ../Base2B/objects/player/stage3stickman.cpp ../Base2B/objects/player/stage3stickman.h \
@@ -1687,6 +1701,79 @@ mementodialogstate.o: ../Base2B/objects/mementodialogstate.cpp ../Base2B/objects
 		../../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
 		../Base2B/core/gamestage.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mementodialogstate.o ../Base2B/objects/mementodialogstate.cpp
+
+loselifetest.o: ../Base2B/core/testing/testcases/loselifetest.cpp ../Base2B/core/testing/testcases/loselifetest.h \
+		../Base2B/objects/player/stage3stickman.h \
+		../Base2B/objects/entities/entity.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QPixmap \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../Base2B/objects/player/stickman.h \
+		../Base2B/objects/gameobject.h \
+		../Base2B/coordinate.h \
+		../Base2B/rendering/renderer.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../Base2B/core/game.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../Base2B/core/gamestage.h \
+		../Base2B/objects/player/jumpingstickman.h \
+		../Base2B/score.h \
+		../Base2B/life.h \
+		../Base2B/objects/mementoState.h \
+		../Base2B/objects/memento.h \
+		../Base2B/objects/mementodialogstate.h \
+		../Base2B/objects/background.h \
+		../Base2B/core/testing/testrunner.h \
+		../Base2B/objects/player/normalstatestickman.h \
+		../Base2B/objects/player/stickmanstate.h \
+		../Base2B/core/stage3dialog.h \
+		../Base2B/core/stage2dialog.h \
+		../Base2B/core/dialog.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/QFile \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qfile.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../../Qt/5.13.0/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		../Base2B/objects/moon.h \
+		../Base2B/objects/entities/entityfactory.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o loselifetest.o ../Base2B/core/testing/testcases/loselifetest.cpp
+
+switchstatetest.o: ../Base2B/core/testing/testcases/switchstatetest.cpp ../Base2B/core/testing/testcases/switchstatetest.h \
+		../Base2B/objects/player/stage3stickman.h \
+		../Base2B/objects/entities/entity.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QPixmap \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qpixmap.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QPainter \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qpainter.h \
+		../Base2B/objects/player/stickman.h \
+		../Base2B/objects/gameobject.h \
+		../Base2B/coordinate.h \
+		../Base2B/rendering/renderer.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/QKeyEvent \
+		../../../../Qt/5.13.0/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../Base2B/core/game.h \
+		../../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/QDialog \
+		../../../../Qt/5.13.0/clang_64/lib/QtWidgets.framework/Headers/qdialog.h \
+		../Base2B/core/gamestage.h \
+		../Base2B/objects/player/jumpingstickman.h \
+		../Base2B/score.h \
+		../Base2B/life.h \
+		../Base2B/objects/mementoState.h \
+		../Base2B/objects/memento.h \
+		../Base2B/objects/mementodialogstate.h \
+		../Base2B/objects/background.h \
+		../Base2B/core/testing/testrunner.h \
+		../Base2B/objects/player/normalstatestickman.h \
+		../Base2B/objects/player/stickmanstate.h \
+		../Base2B/objects/player/tinystatestickman.h \
+		../Base2B/objects/player/largestatestickman.h \
+		../Base2B/objects/player/giantstatestickman.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o switchstatetest.o ../Base2B/core/testing/testcases/switchstatetest.cpp
+
+giantcollisiontest.o: ../Base2B/core/testing/testcases/giantcollisiontest.cpp ../Base2B/core/testing/testcases/giantstatecollisiontest.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o giantcollisiontest.o ../Base2B/core/testing/testcases/giantcollisiontest.cpp
 
 qrc_resources.o: qrc_resources.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o qrc_resources.o qrc_resources.cpp

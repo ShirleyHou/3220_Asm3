@@ -6,9 +6,11 @@
 Stage3Stickman::Stage3Stickman(int floor, int jumpImpulse, int maxJumpCount, int gravity) :
     JumpingStickman (floor, jumpImpulse, maxJumpCount, gravity),
     score(Score()),
-    memento_state(MementoState())
+    memento_state(MementoState()),
+    initial_memento_state(MementoState())
     {
     memento_state = MementoState(score, current_state);
+    initial_memento_state = MementoState(score, current_state);
     gameOver = new QPixmap (":/sprites/GameOver.png");
     gameWin = new QPixmap (":/sprites/Win.png");
 
@@ -62,7 +64,11 @@ void Stage3Stickman::update(std::vector<std::unique_ptr<Entity>> &obstacles) {
     if(reset==true){
         std::cout<<"triggered reset"<<std::endl;
         simpleRestore();
-        this->dialog->simpleRestore();
+        if(this->dialog!=nullptr){
+            //std::cout<<"triggered reset1.5"<<std::endl;
+            this->dialog->simpleRestore();
+            //std::cout<<"triggered reset2"<<std::endl;
+        }
         reset=false;
     }
 }

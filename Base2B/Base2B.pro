@@ -68,7 +68,10 @@ SOURCES += \
     life.cpp \
     objects/memento.cpp \
     objects/mementoState.cpp \
-    objects/mementodialogstate.cpp
+    objects/mementodialogstate.cpp \
+    core/testing/testcases/loselifetest.cpp \
+    core/testing/testcases/switchstatetest.cpp \
+    core/testing/testcases/giantcollisiontest.cpp
 
 HEADERS += \
     objects/entities/colouredentity.h \
@@ -108,7 +111,10 @@ HEADERS += \
     life.h \
     objects/memento.h \
     objects/mementoState.h \
-    objects/mementodialogstate.h
+    objects/mementodialogstate.h \
+    core/testing/testcases/loselifetest.h \
+    core/testing/testcases/switchstatetest.h \
+    core/testing/testcases/giantstatecollisiontest.h
 
 FORMS += \
         dialog.ui
