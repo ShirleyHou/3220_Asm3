@@ -17,13 +17,28 @@
 #include "normalstatestickman.h"
 #include "loselifetest.h"
 #include "switchstatetest.h"
+#include "gainlifetest.h"
+#include "giantstatecollisiontest.h"
 StageFactory::StageFactory(Config config) : config(config) {
 
 }
 
 std::unique_ptr<GameStage> StageFactory::createStage() {
     if (config.stage==3){
-        //currently no test mode
+        if (config.testMode){
+            // Stage 2 test mode
+            std::vector<std::unique_ptr<TestRunner>> tests;
+            tests.push_back(std::make_unique<GainLifeTest>());
+            tests.push_back(std::make_unique<GiantStateCollisionTest>());
+            tests.push_back(std::make_unique<SwitchStateTest>());
+            tests.push_back(std::make_unique<LoseLifeTest>());
+
+            std::unique_ptr<GameStage> tester = std::make_unique<TestingDialog>(std::move(tests));
+            return std::make_unique<SwapRendererStage>(std::move(tester));
+        }
+
+
+        //give dependency to player
         auto player = std::make_unique<Stage3Stickman>(config.coord.getYCoordinate());
         player->setSize("normal");//config.size is a string.
         player->setCoordinate(config.coord);
@@ -38,12 +53,17 @@ std::unique_ptr<GameStage> StageFactory::createStage() {
         auto factory = std::make_unique<EntityFactory>();
         factory->setVelocity(config.velocity);
         player->simpleSave();
+        player->initializeSave();
+
+        //make stage
         auto stage = std::make_unique<Stage3Dialog>(*config.game, std::move(player), std::move(factory), std::move(*config.obstacles));
         stage->obstacle_to_spawn = config.level*(config.level-1)*5/2+5*config.level;
         std::cout<<"obstacle_to_spawn: "<<stage->obstacle_to_spawn<<std::endl;
         stage->level = config.level;
         genericDialogInitializer(*stage);
         stage->simpleSave();
+        MementoDialogState initial_dialog  = stage->dialog_memo;
+        stage->dialog_initial_state = initial_dialog;
         return std::make_unique<SwapRendererStage>(std::move(stage));
 
 
@@ -51,8 +71,6 @@ std::unique_ptr<GameStage> StageFactory::createStage() {
         if (config.testMode) {
             // Stage 2 test mode
             std::vector<std::unique_ptr<TestRunner>> tests;
-            tests.push_back(std::make_unique<SwitchStateTest>());
-            tests.push_back(std::make_unique<LoseLifeTest>());
             tests.push_back(std::make_unique<CollisionTest>());
             tests.push_back(std::make_unique<JumpTest>());
             tests.push_back(std::make_unique<FlyingObstacleTest>());

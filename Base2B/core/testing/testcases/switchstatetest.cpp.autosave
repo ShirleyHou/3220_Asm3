@@ -20,10 +20,9 @@ SwitchStateTest::SwitchStateTest():TestRunner("SwitchStateTest")
 
 }
 
+
 void SwitchStateTest::update() {
-    /*
-     * show if
-     */
+    
     stickman->update(obstacles);
     if (counter!=0 && counter%600==0){
         stickman->current_state = stickman->giant_state;

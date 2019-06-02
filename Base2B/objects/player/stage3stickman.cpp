@@ -16,8 +16,15 @@ Stage3Stickman::Stage3Stickman(int floor, int jumpImpulse, int maxJumpCount, int
 
 }
 void Stage3Stickman::handleInput(QKeyEvent &event) {
+    if (event.key()==Qt::Key_Return && (this->win||this->lost)){
+        std::cout<<"triggered restart"<<std::endl;
+        this->restart();
+        this->dialog->restart();
+
+    }
 
     if (event.key()==Qt::Key_T){
+
         current_state = tiny_state;
     }
     if (event.key()==Qt::Key_N){
@@ -37,10 +44,12 @@ void Stage3Stickman::handleInput(QKeyEvent &event) {
         grounded = false;
     }
 
+
 }
 void Stage3Stickman::checkPass(std::unique_ptr<Entity> &other){
     if (!other->passed && other->getCoordinate().getXCoordinate()+other->width() <this->getCoordinate().getXCoordinate()){
-        if(other->name!="flag"||other->name!="heart"){
+        std::cout<<other->name<<std::endl;
+        if(other->name!="flag"&&other->name!="heart"){
             this->score.increment();
         }else if(other->name=="flag"){
             //passed a level.
@@ -50,6 +59,7 @@ void Stage3Stickman::checkPass(std::unique_ptr<Entity> &other){
         other->passed=true;
         if(other->isLast){
             win = true;
+            this->score.hiScore = std::max(score.hiScore, score.currScore);
         }
     }
 }
@@ -60,14 +70,13 @@ void Stage3Stickman::update(std::vector<std::unique_ptr<Entity>> &obstacles) {
 
     if (life->no_life==0){
         lost = true;
+        this->score.hiScore = std::max(score.hiScore, score.currScore);
     }
     if(reset==true){
         std::cout<<"triggered reset"<<std::endl;
         simpleRestore();
         if(this->dialog!=nullptr){
-            //std::cout<<"triggered reset1.5"<<std::endl;
             this->dialog->simpleRestore();
-            //std::cout<<"triggered reset2"<<std::endl;
         }
         reset=false;
     }
@@ -87,4 +96,15 @@ void Stage3Stickman::render(Renderer &renderer, unsigned int time) {
 
 
 }
+void Stage3Stickman::restart(){
+
+        this->score.currScore =1;
+        this->current_state = this->normal_state;
+        this->win=false;
+        this->lost=false;
+        this->life=new Life(this->initial_memento_state.no_life);
+        this->simpleSave();
+
+        std::cout<<"Stickman Simple restarted"<<std::endl;
+    }
 

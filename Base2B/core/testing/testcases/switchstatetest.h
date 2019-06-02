@@ -4,6 +4,11 @@
 #include "testrunner.h"
 #include "entity.h"
 
+
+/*
+ * show if it can switch between 4 states.
+ */
+
 class SwitchStateTest : public TestRunner
 {
 public:

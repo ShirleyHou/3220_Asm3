@@ -26,6 +26,7 @@ void LargeStateStickman::update(Stage3Stickman* context, std::vector<std::unique
 
         if (col.overlapped) {
             if(!other->collided){
+                //heart are erased when hit by non tiny states.
                 if(other->name!="heart"){
                 context->life->decrement();
                 context->reset=true;

@@ -16,10 +16,11 @@ public:
     void decrement();
     void render(Renderer &renderer);
     void setScore(int score);
-//private
-    unsigned int hiscore;
+
+    unsigned int hiScore;
     unsigned int currScore;
     QPixmap digits[10];
+    QPixmap HI = QPixmap(":sprites/HI.png");
 };
 
 #endif // SCORE_H

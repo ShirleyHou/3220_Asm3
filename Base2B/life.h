@@ -10,7 +10,7 @@
 class Life
 {
 public:
-    Life();
+    Life(int life);
     int no_life;
     void decrement();
     void increment();

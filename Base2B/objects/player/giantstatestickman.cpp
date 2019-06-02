@@ -22,7 +22,7 @@ void GiantStateStickman::update(Stage3Stickman* context, std::vector<std::unique
 
         Collision::CollisonResult col = Collision::moveCast(*context, *other, 0, context->jumpVelocity);
         context->checkPass(other);
-
+        //erase obstacle if its not a flag.
         if (col.overlapped && other->passed==false && other->name!="flag") {
             if(other->name=="heart" && other->collided==false){
                 context->life->increment();
@@ -36,7 +36,8 @@ void GiantStateStickman::update(Stage3Stickman* context, std::vector<std::unique
         erase_pos++;
 
     }
-    //does erase
+    //does erase of obstacles.
+
     for (auto it = to_erase.rbegin(); it != to_erase.rend(); ++it){
         int i = *it;
         obstacles.erase(obstacles.begin()+i);

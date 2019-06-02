@@ -29,7 +29,7 @@ void TinyStateStickman::update(Stage3Stickman* context, std::vector<std::unique_
             }
             int by = other->getCoordinate().getYCoordinate();
             if (col.down && context->jumpVelocity < 0) {
-                // Hitting obstacle from above
+                // Hitting obstacle from above - tiny mode can still sit on it.
                 context->jumpVelocity = 0;
                 context->grounded = true;
                 context->jumpCount = 0;

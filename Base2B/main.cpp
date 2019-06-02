@@ -59,7 +59,7 @@ int main(int argc, char *argv[]) {
     background.setSprite(":ground.png");
     background.setCoordinate(Coordinate(0, 150, 450));
     //set up life
-    Life life;
+    Life life(3);
 
     StageFactory::Config stageConfig;
     vector<pair<unique_ptr<Entity>, int>> obstacles;

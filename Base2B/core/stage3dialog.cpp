@@ -12,7 +12,7 @@ Stage3Dialog::Stage3Dialog(Game &game,
                  std::move(factory),
                  std::move(obstacleLayout))
 {
-
+    obstacle_render_counter= 0;
     frameVelocity = background.initialVelocity;
 }
 
@@ -23,6 +23,7 @@ void Stage3Dialog::moveRight(){
     frameVelocity = 3;
 }
 void Stage3Dialog::input(QKeyEvent &event){
+
     Stage3Stickman& stick3 = dynamic_cast<Stage3Stickman&>(*stickman);
 
     stick3.handleInput(event);
@@ -39,11 +40,13 @@ void Stage3Dialog::input(QKeyEvent &event){
 
 
 void Stage3Dialog::update() {
+
     Stage3Stickman& stick3 = dynamic_cast<Stage3Stickman&>(*stickman);
 
     if(stick3.win||stick3.lost){
         return;
     }
+
     if(game.longPressed==false){
         background.setVelocity(0);
         for (auto &o : obstacles) {
@@ -59,25 +62,28 @@ void Stage3Dialog::update() {
         }
     }
 
-    //Stage3Stickman& stick3 = dynamic_cast<Stage3Stickman&>(*stickman);
     if(stick3.dialog!=this){
         stick3.dialog=this;
 
     }
+
     stick3.update(obstacles);
 
     if (!stick3.isColliding()) {
 
         background.update();
     }
-    spawnObstacles(counter);
+    spawnObstacles(obstacle_render_counter);
 
 
     for (auto &o : obstacles) {
 
         o->collisionLogic(stick3);
 
+
     }
+
+
 
 }
 
@@ -89,6 +95,7 @@ void Stage3Dialog::speedUp(unsigned int counter){
 
 
 void Stage3Dialog::spawnObstacles(unsigned int counter) {
+
     if(obstacle_to_spawn==-1){
         return;
     }
@@ -101,10 +108,14 @@ void Stage3Dialog::spawnObstacles(unsigned int counter) {
             e->isLast = true;
         }
         addObstacle(std::move(e));
-        obstacleSpawnFrame += (300 / (1+background.getVelocity())) + ((rand() % 16 )* 3);
-        obstacle_to_spawn--;
+        if(background.getVelocity()!=0){
+            obstacleSpawnFrame += (300 / (1+background.getVelocity())) + ((rand() % 16 )* 3);
+            obstacle_to_spawn--;
+
+        }
         obstacle_on_current_level=0;
         current_level+=1;
+
 
     }
 
@@ -112,7 +123,8 @@ void Stage3Dialog::spawnObstacles(unsigned int counter) {
 
         std::unique_ptr<Entity> e;
         int random = rand()%10;
-        if (random<=1){
+
+        if (random==1){
             e = factory->getEntity("heart");
         }else if(random<=5){
             e = factory->getEntity("bird");
@@ -122,11 +134,12 @@ void Stage3Dialog::spawnObstacles(unsigned int counter) {
 
 
         addObstacle(std::move(e));
+        if(background.getVelocity()!=0){
         obstacleSpawnFrame += (300 / (1+background.getVelocity())) + ((rand() % 16 )* 3);
         obstacle_to_spawn--;
         obstacle_on_current_level++;
 
-
+        }
     }
 
 
@@ -150,10 +163,17 @@ void Stage3Dialog::renderObstacles(Renderer &renderer, unsigned int counter) {
     }
 }
 void Stage3Dialog::render(Renderer &renderer) {
+
     renderBackground(renderer, counter);
     renderObstacles(renderer, counter);
     stickman->render(renderer, counter);
     counter++;
+    if(background.getVelocity()>0){
+        obstacle_render_counter++;
+    }else if (background.getVelocity()<0){
+        obstacle_render_counter--;
+    }
+
 }
 
 void Stage3Dialog::renderBackground(Renderer &renderer, unsigned int counter) {
@@ -183,8 +203,8 @@ void Stage3Dialog::simpleSave(){
         }
         int total_to_spawn = total_sum-total_spawned;
 
-        dialog_memo = MementoDialogState(obstacleSpawnFrame, counter,total_to_spawn,current_level);
-
+        dialog_memo = MementoDialogState(obstacleSpawnFrame, counter, obstacle_render_counter, total_to_spawn,current_level);
+        std::cout<<"Simple saved: "<<"current level: "<<this->current_level<< "to spawn: "<<this->obstacle_to_spawn<<std::endl;
     }
 
 void Stage3Dialog::simpleRestore(){
@@ -198,9 +218,21 @@ void Stage3Dialog::simpleRestore(){
         }
         this->obstacleSpawnFrame = dialog_memo.dialog_obstacleSpawnFrame;
         this->counter = dialog_memo.dialog_counter;
+        this->obstacle_render_counter = dialog_memo.dialog_obstacle_render_counter;
         this->current_level = dialog_memo.dialog_current_level;
         this->obstacle_to_spawn = dialog_memo.dialog_obstacles_to_spawn;
         this->obstacle_on_current_level = 0;
 
-        //std::cout<<"Dialog Simple recovered from last state: "<<"current level: "<<this->current_level<< "to spawn: "<<this->obstacle_to_spawn<<std::endl;
+        std::cout<<"Dialog Simple recovered from last state: "<<"current level: "<<this->current_level<< "to spawn: "<<this->obstacle_to_spawn<<std::endl;
     }
+void Stage3Dialog::restart(){
+    this->obstacles.clear();
+    this->obstacleSpawnFrame = 200;//dialog_initial_state.dialog_obstacleSpawnFrame;
+    this->counter = 0;//dialog_initial_state.dialog_counter;
+    this->obstacle_render_counter = 0;
+    this->current_level = 1;
+    this->obstacle_to_spawn = dialog_initial_state.dialog_obstacles_to_spawn;
+    this->obstacle_on_current_level = 0;
+    this->simpleSave();
+    std::cout<<"Dialog restarted with "<<obstacle_to_spawn<<" " <<current_level<<" "<<counter<<std::endl;
+}

@@ -71,7 +71,8 @@ SOURCES += \
     objects/mementodialogstate.cpp \
     core/testing/testcases/loselifetest.cpp \
     core/testing/testcases/switchstatetest.cpp \
-    core/testing/testcases/giantcollisiontest.cpp
+    core/testing/testcases/giantcollisiontest.cpp \
+    core/testing/testcases/gainlifetest.cpp
 
 HEADERS += \
     objects/entities/colouredentity.h \
@@ -114,7 +115,8 @@ HEADERS += \
     objects/mementodialogstate.h \
     core/testing/testcases/loselifetest.h \
     core/testing/testcases/switchstatetest.h \
-    core/testing/testcases/giantstatecollisiontest.h
+    core/testing/testcases/giantstatecollisiontest.h \
+    core/testing/testcases/gainlifetest.h
 
 FORMS += \
         dialog.ui

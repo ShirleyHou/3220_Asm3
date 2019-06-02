@@ -1,18 +1,18 @@
-#ifndef GIANTSTATECOLLISIONTEST_H
-#define GIANTSTATECOLLISIONTEST_H
+#ifndef GAINLIFETEST_H
+#define GAINLIFETEST_H
 
 #include "stage3stickman.h"
 #include "testrunner.h"
 #include "entity.h"
 
 /*
- * show colliding on giant state removes an obstacle.
+ * show if colliding with a heart gets you a life.
  */
-class GiantStateCollisionTest: public TestRunner
+class GainLifeTest : public TestRunner
 {
 public:
-    GiantStateCollisionTest();
-     ~GiantStateCollisionTest()= default;
+    GainLifeTest();
+     ~GainLifeTest() = default;
     void update();
     void render(Renderer &renderer);
 private:
@@ -22,4 +22,4 @@ private:
     int original_life;
 };
 
-#endif // GIANTCOLLISIONTEST_H
+#endif // GAINLIFETEST_H

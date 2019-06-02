@@ -5,6 +5,10 @@
 #include "testrunner.h"
 #include "entity.h"
 
+/*
+ * show if normal state loses a life when collision with an obstacle.
+ */
+
 class LoseLifeTest : public TestRunner {
 public:
     LoseLifeTest();

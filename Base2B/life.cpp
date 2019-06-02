@@ -1,7 +1,7 @@
 #include "life.h"
 #include <iostream>
-Life::Life():
-    no_life(3){
+Life::Life(int life):
+    no_life(life){
     heart = QPixmap(":sprites/heart.png");
 }
 void Life::decrement(){
